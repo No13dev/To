@@ -1,0 +1,37 @@
+.dropdown{
+position: relative;
+}
+.dropdown-btn{
+background: transparent;
+border: none;
+color: #d0d0d0;
+cursor: pointer;
+font-size: 16px;
+transition: .3s;
+}
+.dropdown-btn:hover{
+color: white;
+}
+.dropdown-menu{
+position: absolute;
+top: 45px;
+left: 0;
+display: none;
+flex-direction: column;
+min-width: 180px;
+background: rgba(20,20,20,.95);
+border-radius: 18px;
+border: 1px solid rgba(255,255,255,.08);
+overflow: hidden;
+backdrop-filter: blur(10px);
+}
+.dropdown-menu.show{
+display: flex;
+}
+.dropdown-menu a{
+padding: 16px 20px;
+}
+.dropdown-menu a:hover{
+background: rgba(255,255,255,.05);
+}
+
