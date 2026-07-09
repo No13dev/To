@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<meta name="theme-color" content="#0d0d0d">
 </head>
 <body>
 <header class="header">
@@ -21,9 +22,8 @@
 </button>
 </header>
 <section id="hero" class="hero">
-<div class="hero-overlay"></div>
 <div class="hero-content">
-<h1 class="hero-title"> کیفیت اتفاقی نیست </h1>
+<h1 class="hero-title"> کیفیت اتفاقی نیست </h1> 
 <p class="hero-subtitle"> هر انتخاب روایت توست </p>
 <a href="#products" class="hero-btn"> مشاهده محصولات </a>
 </div>
@@ -54,153 +54,85 @@
 </div>
 <section class="products" id="products">
 <section id="tobacco" class="product-section"> 
-<h2>توتون</h2>
+<h2 class="section-title"> توتون </h2>
 <button class="scroll-left"> ⬅ </button>
 <button class="scroll-right"> ➡ </button>
-<div class="product-grid">
-<div class="product-card" data-name="ویرجینیا طلایی" data-category="توتون" data-description="توتون روشن با بافت نرم تر و طعم ملایم تر, برای سلیقه های سبک تر با دود روان تر " data-status="" data-image="images/virginiagold.webp">
-<img src="images/virginiagold.webp" loading="lazy" alt="Tobacco">
-<h3>ویرجینیا طلایی</h3>
-<span class="available">موجود</span>
-</div>
-<div class="product-card" data-name="ماربورو طلایی" data-category="توتون" data-description="ترکیبی روشن و نرم با حس متعادل و لوکس " data-status="" data-image="images/marlborogold.webp">
-<img src="images/marlborogold.webp" loading="lazy" alt="Tobacco">
-<h3>ماربورو طلایی</h3>
-<span class="available">موجود</span>
-</div>
-<div class="product-card" data-name="وینستون" data-category="توتون" data-description=" توتون کلاسیک؛ نه خیلی سبک نه خیلی سنگین با طعمی آشنا " data-status="" data-image="images/winston.webp">
-<img src="images/winston.webp" loading="lazy" alt="Tobacco">
-<h3>وینستون</h3>
-<span class="available">موجود</span>
-</div>
-<div class="product-card" data-name="اسی" data-category="توتون" data-description="بافت تیره و طعم قابل لمس با دود غلیظ تر " data-status="" data-image="images/ese.webp">
-<img src="images/ese.webp" loading="lazy" alt="Tobacco">
-<h3>اسی</h3>
-<span class="available">موجود</span>
-</div>
-<div class="product-card" data-name="جنگلی" data-category="توتون" data-description="بافت طبیعی حس نزدیک تر به توتون خام برای سلیقه های خاص " data-status="" data-image="images/jangali.webp">
-<img src="images/jangali.webp" loading="lazy" alt="Tobacco">
-<h3>جنگلی</h3>
-<span class="available">موجود</span>
-</div>
-<div class="product-card" data-name="ویرجینیا خاکستری" data-category="توتون" data-description=" بافت تیره تر با بافت بیشتر و طعمی عمیق سازگار با همه سلیقه ها " data-status="" data-image="images/virginiagray.webp">
-<img src="images/virginiagray.webp" loading="lazy" alt="Tobacco">
-<h3>ویرجینیا خاکستری</h3>
-<span class="available">موجود</span>
-</div>
-<div class="product-card" data-name="کوبا" data-category="توتون" data-description="توتون تیره و قوی با حس عمیق در درک طعم و رایحه ای بینظیر " data-status="" data-image="images/koba.webp">
-<img src="images/koba.webp" loading="lazy" alt="Tobacco">
-<h3>کوبا</h3>
-<span class="available">موجود</span>
-</div>
-<div class="product-card" data-name="ماربورو قرمز" data-category="توتون" data-description="طعم پررنگ وشخصیت قوی تر در خانواده ماربورو  " data-status="" data-image="images/marlborored.webp">
-<img src="images/marlborored.webp" loading="lazy" alt="Tobacco">
-<h3>ماربورو قرمز</h3>
-<span class="available">موجود</span>
-</div>
+<div class="product-grid" id="tobacco-products" data-category="tobacco">
 </div>
 </section>
 <section id="filter" class="product-section">
-<h2>پوکه</h2>
+<h2 class="section-title">پوکه</h2>
 <button class="scroll-left"> ⬅ </button>
 <button class="scroll-right"> ➡ </button>
-<div class="product-grid">
-<div class="product-card" data-name="T&T" data-category="پوکه"  data-description="کیفیت مناسب و ساخت تمیز, کمترین گوگرد در لایه های کاغذ" data-status="" data-image="images/T&T.webp">
-<img src="images/T&T.webp" loading="lazy" alt="Filter">
-<h3>T&T</h3>
-<span class="limited">محدود</span>
-</div>
+<div class="product-grid" id="filter-products" data-category="filter">
 </div>
 </section>
 <section id="cigar" class="product-section">
-<h2>سیگار برگ</h2>
+<h2 class="section-title">سیگار برگ</h2>
 <button class="scroll-left"> ⬅ </button>
 <button class="scroll-right"> ➡ </button>
-<div class="product-grid">
-<div class="product-card" data-name="کوبا" data-category="سیگار برگ" data-description="سیگار برگ با توتون کوبا, بافت سنگین تر و طعمی تیره تر" data-status="" data-image="images/kobabarg.webp">
-<img src="images/kobabarg.webp" loading="lazy" alt="Cigar">
-<h3>برگ کوبایی</h3>
-<span class="unavailable">ناموجود</span>
-</div>
+<div class="product-grid" id="cigar-products" data-category="cigar">
 </div>
 </section>
 <section id="accessory" class="product-section">
-<h2>اکسسوری</h2>
+<h2 class="section-title">اکسسوری</h2>
 <button class="scroll-left"> ⬅ </button>
 <button class="scroll-right"> ➡ </button>
-<div class="product-grid">
-<div class="product-card" data-name="جعبه سیگار" data-category="اکسسوری" data-description=" جعبه سیگار چوبی درب مگنتی " data-status="" data-image="images/chobibox.webp">
-<img src="images/chobibox.webp" loading="lazy" alt="accessory">
-<h3>جعبه سیگار چوبی</h3>
-<span class="unavailable">ناموجود</span>
+<div class="product-grid" id="accessory-products" data-category="accessory">
 </div>
-<div class="product-card" data-name="چوب سیگار" data-category="اکسسوری" data-description=" چوب سیگار با چوب گردو " data-status="" data-image="images/chobcigar.webp">
-<img src="images/chobcigar.webp" loading="lazy" alt="accessory">
-<h3>چوب سیگار برنجی</h3>
-<span class="limited">محدود</span>
-</div>
+</section>
+<section id="machine" class="product-section">
+<h2 class="section-title">دستگاه پرکن</h2>
+<button class="scroll-left"> ⬅ </button>
+<button class="scroll-right"> ➡ </button>
+<div class="product-grid" id="machine-products" data-category="machine">
 </div>
 </section>
 </section>
-<div class="modal">
-<div class="modal-content">
-<span class="close-modal">✖</span>
-<img id="modal-image" src="" alt="">
-<h2 id="modal-title"></h2>
-<p id="modal-description"></p>
-<span id="modal-status"></span>
+
+<div class="product-modal" id="product-modal">
+<div class="product-content">
+<span class="close-product">✖</span>
+<img id="product-image" src="" alt="">
+<h2 id="product-title"></h2>
+<p id="product-description"></p>
+<span id="product-status"></span>
+<button class="add-product-btn">افزودن به سبد خرید
+</button>
 </div>
 </div>
-<div class="search-overly">
-<div class="search-box">
-<input type="text" class="search-input" placeholder="...جستجوی محصولات">
-</div>
-<div class="serach-results">
-</div>
-</div>
-<div class="order-modal">
+<div class="order-modal" id="order-modal">
 <div class="order-content">
 <span class="close-order">
 ✖
 </span>
 <h2>ارتباط با ما</h2>
 <div class="social-links">
-<a href="https://t.me/apk3007" target="_blank">
+<a href="https://t.me/apk3007" target="_blank" rel="noopener noreferrer">
 Telegram </a>
-<a href="https://rubika.ir/Tocigar" target="_blank"> روبیکا </a>
-<a href="https://bale.ai/tocigar" target="_blank"> بله </a>
 </div>
 </div>
 </div>
-<div class="about-modal">
+<section id="to" class="about-to">
+<button class="about-btn"> آشنایی با تــو
+</button>
+</section>
+<div class="about-modal" id="about-modal">
 <div class="about-content">
 <span class="close-about">
 ✖
 </span>
-<h2> آشنایی با تو </h2>
-<div class="video-list">
 </div>
 </div>
-</div>
-<video class="video-player" controls></video>
+<video id="video-player" class="video-player" controls ></video>
 <div class="video-modal">
 <div class="video-content">
 <span class="close-video"> ✖ </span>
-<h2> تفاوت </h2>
-<p> تفاوت </p>
 <button class="prev-video"> ⬅ </button>
 <button class="next-video"> ➡ </button>
 </div>
 </div>
-<section id="to" class="about-to">
-<h2> درباره تو </h2>
-<p> کیفیت اتفاقی نیست... </p>
-<button class="about-btn"> آشنایی با تــو </button>
-</section>
 <footer id="contact" class="footer">
-<h2>آدرس:میدان کرج-تقاطع بلوار چمران و مدرس-نبش سینما هجرت-قهوه تــو </h2>
-<a href="tel:09014909612"> 09014909612 </a>
-<br>
 <button class="contact-btn">خرید</button>
 </footer>
 <div class="cart-floating">
@@ -209,15 +141,21 @@ Telegram </a>
 0 
 </span>
 </div>
-<div class="cart-modal">
+<div class="cart-modal" id="cart-modal">
 <div class="cart-content">
 <span class="close-cart"> 
 ✖ 
 </span>
 <h2> سبد خرید </h2>
 <div class="cart-items"> 
-</div> 
 </div>
+<button class="clear-cart-btn"> 🗑
+</button>
+</div>
+</div>
+<div class="admin-panel hidden" id="admin-panel">
+</div>
+<div class="toast-container">
 </div>
 <script src="js/script.js"></script>
 </body>
