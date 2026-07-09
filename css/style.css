@@ -8,7 +8,7 @@ scroll-behavior: smooth;
 }
 body{
 background-image:
-url("../images/background.webp");
+url("../images/background-mobile.webp");
 background-size:
 cover;
 background-position:
@@ -19,6 +19,11 @@ background-repeat:
 no-repeat;
 color: #e5e5e5;
 font-family: 'Vazirmatn' , sans-serif;
+}
+@media (min-width: 768px) {
+.background-image {
+background-image: url("../images/background-desktop.webp");
+}
 }
 button, input, textarea{
 font-family: inherit;
@@ -208,6 +213,7 @@ border-radius:30px;
 padding:14px 34px;
 cursor:pointer;
 font-size:16px;
+
 }
 
 .story{
