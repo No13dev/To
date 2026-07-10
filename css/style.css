@@ -15,7 +15,7 @@ background-repeat: no-repeat;
 color: #e5e5e5;
 font-family: 'Vazirmatn' , sans-serif;
 min-height:100vh;
-overflow:hidden;
+overflow-x:hidden;
 }
 @media (min-width:768px){
 body{
