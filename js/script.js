@@ -2,14 +2,68 @@ document.addEventListener(
 "DOMContentLoaded",
 () => {
 const App = {
-products: [{
+products: [ {
 id: "virginia-gold",
 category: "tobacco",
 name: "ویرجینیا طلایی",
 image: "images/virginiagold.webp",
-description: "ویرجینیا طلایی از توتون های روشن و با کیفیت تهیه شده  با رنگ زرد؛ ظاهر لطیف و یکدستی دارد.رایحه این محصول فضایی گرم ملایم و کمی شیرین ایچاد میکند که حس تازگی و لطافت را در کنار عطر طبیعی توتون به همراه دارد. به دلیل قدرت نیکوتین پایین در گروه ترکیب های سبک قرار میگیرد و برای علاقه مندان به رایحه های نرم و متعادل انتخاب مناسبی است.",
+description: "ویرجینیا طلایی با عطر و طعم مزرعه و اصالت",
 status: "available",
 order: 1
+} , 
+{
+id: "marlboro-gold",
+category: "tobacco",
+name: "ماربورو طلایی",
+image: "images/marlborogold.webp",
+description: "توتون ماربورو طلایی اصیل ",
+status: "available",
+order: 2
+} ,
+{
+id: "winston",
+category: "tobacco",
+name: "وینستون",
+image: "images/winston.webp",
+description: "توتون وینستون توتون قدیمی و اصیل",
+status: "available",
+order: 3
+} ,
+{
+id: "ese",
+category: "tobacco",
+name: "اسی",
+image: "images/ese.webp",
+description: "توتون اسی توتون متعادل با بافت تیره",
+status: "unavailable",
+order: 4
+} ,
+{
+id: "jungle",
+category: "tobacco",
+name: "جنگلی",
+image: "images/jangali.webp",
+description: "توتون جنگلی سیگار اختصاصی تو",
+status: "available",
+order: 5
+} ,
+{
+id: "koba",
+category: "tobacco",
+name: "کوبا",
+image: "images/koba.webp",
+description: "توتون کوبا توتون اصیل کوبایی با رایحه و طعم خاص",
+status: "available",
+order: 6
+} ,
+{
+id: "marlborored",
+category: "tobacco",
+name: "ویرجینیا طلایی",
+image: "images/marlborored.webp",
+description: "توتون ماربورو رد توتون اصیل و خالص با طعمی تلخ برای سسلیقه خاص",
+status: "available",
+order: 7
 }],
 cart: [],
 elements: {},
@@ -62,6 +116,27 @@ const grid = App.elements.grids[product.category];
 if (!grid) return;
 const card = createProductCard(product);
 grid.appendChild(card);
+});
+document.querySelectorAll(".product-section").forEach((section)=>{
+const grid = section.querySelector(".product-grid");
+if(!grid || grid.children.length === 0){
+section.style.display="none";
+}else{
+section.style.display="";
+}
+});
+}
+function initScrollButtons() {
+document.querySelectorAll(".product-section").forEach((section) => {
+const grid = section.querySelector(".product-grid");
+const left = section.querySelector(".scroll-left");
+const right = section.querySelector(".scroll-right");
+left.addEventListener("click", ()=>{
+grid.scrollBy({ left:-320, behavior:"smooth" });
+});
+right.addEventListener("click", ()=> { 
+grid.scrollBy({ right:320, behavior:"smooth" });
+});
 });
 }
 function closeMenu() {
@@ -209,6 +284,7 @@ closeCart();
 });
 renderProducts();
 initProductEvents();
+initScrollButtons();
 
 function addToCart(product) {
 const item = App.cart.find(
