@@ -61,13 +61,17 @@ z-index: 100;
 }
 .search-overlay{
 position:fixed;
-inset:0;
+top:86px;
+left:0;
+right:0;
+bottom:0;
 display:flex;
 justify-content:center;
 align-items:flex-start;
-padding-top:90px;
+padding-top:20px;
 background:rgba(0,0,0,.45);
 backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
 opacity:0;
 visibility:hidden;
 pointer-events:none;
@@ -91,6 +95,9 @@ display:flex;
 flex-direction:column;
 gap:10px;
 z-index:1001;
+}
+search-results{
+overflow-x:hidden;
 }
 .search-item{
 display:flex;
@@ -163,6 +170,23 @@ color:rgba(255,255,255,.7);
 font-size:16px;
 pointer-events:none;
 }
+.menu-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter:blur(8px);
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+transition:.3s;
+z-index:150 ;
+}
+.menu-overlay.show{
+opacity:1;
+visibility:visible;
+pointer-events:auto;
+}
 .menu-btn{
 background: transparent;
 transition:.3s;
@@ -176,6 +200,8 @@ position: relative;
 transform:scale(1.08);
 }
 .side-menu{
+overflow-y:auto;
+-webkit-overflow-scrolling: touch;
 position: fixed;
 top: 0;
 right: -320px;
@@ -220,6 +246,9 @@ font-size: 22px;
 margin-top: 15px;
 color: white;
 }
+.products-menu{
+display:none;
+}
 .products-menu.show{
 display: flex;
 flex-direction: column;
@@ -244,7 +273,7 @@ background: transparent;
 }
 .products-menu::before{
 content:"";
-position:absolute;
+position:relative;
 top:-10px;
 left:0;
 width:100%;
@@ -389,28 +418,22 @@ z-index:1000;
 .product-modal.show{
 display:flex;
 }
-.product-content img{
-width: 100%;
-aspect-ratio:1/1;
-object-fit:contain;
-border-radius:12px;
-margin-bottom: 25px;
-}
 .product-title {
 margin-bottom: 15px;
 font-size: 24px;
 }
-.product-content{
-display:flex;
-flex-direction:column;
-width:90%;
-max-width:420px;
-padding:30px;
-border-radius:24px;
-background:rgba(20,20,20,.85);
-backdrop-filter:blur(18px);
-border:1px solid rgba(255,255,255,.08);
-position:relative;
+.close-product{
+position:absolute;
+top:18px;
+left:20px;
+font-size:28px;
+cursor:pointer;
+color:#fff;
+transition:.3s;
+}
+.close-product:hover{
+opacity:.7;
+transform:rotate(90deg);
 }
 .product-modal-content{
 display:flex;

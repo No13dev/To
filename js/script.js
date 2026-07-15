@@ -24,6 +24,12 @@ document.querySelectorAll(".product-grid").forEach((grid) => {
 const category = grid.dataset.category;
 App.elements.grids[category] = grid;
 });
+App.elements.menuOverlay = document.getElementById("menu-overlay");
+App.elements.menuBtn = document.getElementById("menu-btn");
+App.elements.sideMenu = document.getElementById("side-menu");
+App.elements.closeMenu = document.getElementById("close-menu");
+App.elements.productsToggle = document.getElementById("products-toggle");
+App.elements.productsMenu = document.getElementById("products-menu");
 App.elements.productModal = document.getElementById("product-modal");
 App.elements.productImage = document.getElementById("product-image");
 App.elements.productTitle = document.getElementById("product-title");
@@ -58,6 +64,30 @@ const card = createProductCard(product);
 grid.appendChild(card);
 });
 }
+function closeMenu() {
+closeSearch();
+App.elements.productsMenu.classList.remove("show");
+App.elements.sideMenu.classList.remove("show");
+document.body.style.overflow = "auto";
+App.elements.menuOverlay.classList.remove("show");
+}
+function openMenu(){
+if (App.elements.sideMenu.classList.contains("show")) { return; }
+App.elements.sideMenu.classList.add("show");
+App.elements.menuOverlay.classList.add("show");
+document.body.style.overflow = "hidden";
+ }
+function toggleProductsMenu() {
+App.elements.productsMenu.classList.toggle("show");
+}
+document.querySelectorAll(".side-nav a").forEach((link) => {
+link.addEventListener("click", closeMenu);
+});
+App.elements.menuBtn.addEventListener( "click", openMenu );
+App.elements.closeMenu.addEventListener( "click", closeMenu );
+App.elements.productsToggle.addEventListener( "click", toggleProductsMenu );
+App.elements.menuOverlay.addEventListener( "click", (event) => {
+if (event.target === App.elements.menuOverlay) { closeMenu(); } });
 function createProductCard(product) {
 const card = document.createElement("article");
 card.className = "product-card";
@@ -167,6 +197,7 @@ closeModal();
 }
 });
 document.addEventListener("keydown", (event) => {
+if ( event.key === "Escape" && App.elements.sideMenu.classList.contains("show") ) { closeMenu(); }
 if ( event.key === "Escape" && App.elements.searchOverlay.classList.contains("show") ) { closeSearch(); }
 if ( event.key === "Escape") { if (App.state.activeModal === "product") {
 closeModal();
