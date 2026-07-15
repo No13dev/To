@@ -1,437 +1,342 @@
 document.addEventListener(
 "DOMContentLoaded",
 () => {
-const menuBtn =
-document.querySelector(
-".menu-btn" );
-const sideMenu =
-document.querySelector(
-".side-menu" );
-const closeMenu =
-document.querySelector(
-".close-menu" );
-const sideLinks =
-document.querySelectorAll(
-".side-nav a" );
-menuBtn
-.addEventListener(
-"click",
-() => {
-sideMenu
-.classList
-.toggle("show"); } );
-closeMenu
-.addEventListener(
-"click",
-() => {
-sideMenu
-.classList
-.remove("show"); } );
-sideLinks
-.forEach((link) => {
-link
-.addEventListener(
-"click",
-() => {
-sideMenu
-.classList
-.remove("show"); } ); });
-document
-.addEventListener(
-"click",
-(event) => {
-if(
-!sideMenu
-.contains(event.target)
-&&
-!menuBtn
-.contains(event.target)
-){
-sideMenu
-.classList
-.remove("show"); } } );
-const productsToggle=
-document.querySelector(
-".products-toggle" );
-const productsMenu =
-document.querySelector(
-".products-menu" );
-productsToggle
-.addEventListener(
-"click",
-() => {
-productsMenu
-.classList
-.toggle("show"); } );
-const cards =
-document.querySelectorAll(
-".product-card" );
-let cart =
-JSON.parse(
-localStorage.getItem("cart") ) || [];
-cards.forEach((card) => {
-const plusBtn =
-document.createElement(
-"button");
-plusBtn.textContent =
-"+";
-plusBtn.classList
-.add("add-cart-btn");
-card.appendChild(
-plusBtn);
-plusBtn
-.addEventListener(
-"click",
-(event) => {
-event.stopPropagation();
-const product = {
-name:
-card.dataset.name,
-category:
-card.dataset.category
+const App = {
+products: [{
+id: "virginia-gold",
+category: "tobacco",
+name: "ویرجینیا طلایی",
+image: "images/virginiagold.webp",
+description: "ویرجینیا طلایی از توتون های روشن و با کیفیت تهیه شده  با رنگ زرد؛ ظاهر لطیف و یکدستی دارد.رایحه این محصول فضایی گرم ملایم و کمی شیرین ایچاد میکند که حس تازگی و لطافت را در کنار عطر طبیعی توتون به همراه دارد. به دلیل قدرت نیکوتین پایین در گروه ترکیب های سبک قرار میگیرد و برای علاقه مندان به رایحه های نرم و متعادل انتخاب مناسبی است.",
+status: "available",
+order: 1
+}],
+cart: [],
+elements: {},
+state: {
+search: "",
+activeModal: null,
+selectedProduct:null
+}
 };
-cart.push(product);
-updateCart();
+App.elements.grids = {};
+document.querySelectorAll(".product-grid").forEach((grid) => {
+const category = grid.dataset.category;
+App.elements.grids[category] = grid;
 });
+App.elements.productModal = document.getElementById("product-modal");
+App.elements.productImage = document.getElementById("product-image");
+App.elements.productTitle = document.getElementById("product-title");
+App.elements.productDescription = document.getElementById("product-description");
+App.elements.productStatus = document.getElementById("product-status");
+App.elements.addProductBtn = document.getElementById("add-product-btn");
+App.elements.closeProduct = document.querySelector(".close-product");
+App.elements.cartModal = document.getElementById("cart-modal");
+App.elements.cartItems = document.querySelector(".cart-items");
+App.elements.clearCartBtn = document.querySelector(".clear-cart-btn");
+App.elements.closeCart = document.querySelector(".close-cart");
+App.elements.cartFloating = document.querySelector(".cart-floating");
+App.elements.cartCount = document.querySelector(".cart-count");
+App.elements.searchOverlay = document.getElementById("search-overlay");
+App.elements.searchResults = document.getElementById("search-results");
+App.elements.searchInput = document.querySelector(".search-box input");
+App.elements.searchInput.addEventListener( "focus", openSearch );
+App.elements.searchInput.addEventListener("input", (event) => {
+App.state.search = event.target.value;
+filterProducts();
 });
-const modal =
-document.querySelector(
-".modal" );
-const closeModal =
-document.querySelector(
-".close-modal" );
-const modalImage =
-document.querySelector(
-"#modal-image" );
-const modalTitle =
-document.querySelector(
-"#modal-title" );
-const modalDescription =
-document.querySelector(
-"#modal-description" );
-const modalStatus =
-document.querySelector(
-"#modal-status" );
-cards.forEach((card) => {
-card.addEventListener(
-"click",
-() => {
-const name =
-card.dataset.name;
-const description =
-card.dataset.description;
-const status =
-card.dataset.status;
-const image =
-card.dataset.image;
-modalImage.src =
-image;
-modalTitle.textContent =
-name;
-modalDescription
-.textContent =
-description;
-modalStatus
-.textContent =
-status;
-modal.style.display =
-"flex"; } ); });
-closeModal
-.addEventListener(
-"click",
-() => {
-modal.style.display =
-"none"; } );
-modal
-.addEventListener(
-"click",
-(event) => {
-if(
-event.target
-=== modal
-){
-modal.style.display =
-"none"; } } );
-const orderBtn =
-document.querySelectorAll(
-".contact-btn" );
-const orderModal =
-document.querySelector(
-".order-modal" );
-const closeOrder =
-document.querySelector(
-".close-order" );
-const orderContent =
-document.querySelector(
-".order-content" );
-orderBtn
-.forEach((btn) => {
-btn .addEventListener(
-"click", () => {
-orderModal
-.style.display =
-"flex"; } ); });
-closeOrder
-.addEventListener(
-"click",
-() => {
-orderModal
-.style.display =
-"none"; } );
-orderModal
-.addEventListener(
-"click",
-(event) => {
-if(
-event.target
-=== orderModal
-){
-orderModal
-.style.display =
-"none"; } } );
-orderContent
-.addEventListener(
-"click",
-(event) => {
-event
-.stopPropagation(); } );
-const cartBtn =
-document.querySelector(
-".cart-floating");
-const cartModal =
-document.querySelector(
-".cart-modal");
-const closeCart =
-document.querySelector(
-".close-cart");
-const cartItems =
-document.querySelector(
-".cart-items");
-const cartCount =
-document.querySelector(
-".cart-count");
-function updateCart(){
-cartCount.textContent =
-cart.length;
-cartItems.innerHTML =
-"";
-const grouped = {};
-cart.forEach(
-(item) => {
-const key =
-item.category +
-"-" +
-item.name;
-if(
-!grouped[key]
-){
-grouped[key] = {
-category:
-item.category,
-name:
-item.name,
-count: 0
-};
-}
-grouped[key]
-.count++;
+App.elements.searchOverlay.addEventListener("click", (event) => {
+if (event.target === App.elements.searchOverlay) { closeSearch(); } });
+function renderProducts(products = App.products) {
+Object.values(App.elements.grids).forEach((grid) => {
+grid.innerHTML = "";
 });
-const categories = {};
-for(
-let key
-in grouped
-){
-const item =
-grouped[key];
-if(
-!categories[
-item.category
-]){
-categories[
-item.category
-] = [];
+products.forEach((product) => {
+const grid = App.elements.grids[product.category];
+if (!grid) return;
+const card = createProductCard(product);
+grid.appendChild(card);
+});
 }
-categories[
-item.category
-].push(
-item
-);
-}
-for(
-let category
-in categories
-){
-const title =
-document.createElement(
-"h3");
-title.textContent =
-category;
-cartItems
-.appendChild(
-title);
-categories[
-category
-].forEach(
-(item) => {
-const row =
-document
-.createElement(
-"div");
-row.classList
-.add(
-"cart-row"
-);
-row.innerHTML =
-`
-<span>
-${item.name}
-</span>
-<div class="cart-controls">
-<button class="minus-btn">
--
-</button>
-<span>
-${item.count}
-</span>
-<button class="plus-btn">
+function createProductCard(product) {
+const card = document.createElement("article");
+card.className = "product-card";
+card.innerHTML = `
+<img
+class="product-image"
+src="${product.image}"
+alt="${product.name}"
+loading="lazy"
+>
+<div class="product-content">
+<h3 class="product-title">${product.name}</h3>
+<p class="product-status ${getStatusClass(product.status)}">
+${getStatusText(product.status)}
+</p>
+<button class="add-cart-btn"
+type="button"
+aria-label="افزودن به سبد خرید">
 +
 </button>
 </div>
 `;
-const minusBtn =
-row.querySelector(
-".minus-btn"
-);
-const plusBtn =
-row.querySelector(
-".plus-btn"
-);
-minusBtn
-.addEventListener(
-"click",
-() => {
-const index =
-cart.findIndex(
-(product) =>
-product.name===item.name &&
-product.category===item.category);
-if(
-index !== -1
-){
-cart.splice(
-index,
-1
-);
-updateCart();
+card.dataset.id = product.id;
+card.dataset.category = product.category;
+return card;
 }
-});
-plusBtn
-.addEventListener(
-"click",
-() => {
-cart.push({
-name:
-item.name,
-category:
-item.category
-});
-updateCart();
-});
-cartItems
-.appendChild(
-row
-);
-});
-localStorage.setItem(
-"cart",
-JSON.stringify(cart) );
+function openModal(product) {
+App.elements.productImage.src = product.image;
+App.elements.productImage.alt = product.name;
+App.elements.productTitle.textContent = product.name;
+App.elements.productDescription.textContent = product.description;
+App.elements.productStatus.className = `product-status ${getStatusClass(product.status)}`;
+App.elements.productModal.classList.add("show");
+App.state.activeModal = "product";
+App.elements.productStatus.textContent =
+getStatusText(product.status);
+App.state.selectedProduct = product;
 }
+App.elements.addProductBtn.addEventListener("click", () => {
+const product = App.state.selectedProduct;
+if (!product) return;
+addToCart(product);
+});
+function openCart() {
+renderCart();
+App.elements.cartModal.classList.add("show");
+App.state.activeModal = "cart";
 }
-updateCart();
-cartBtn.addEventListener("click", () => { cartModal.style.display = "flex";
-});
-closeCart.addEventListener("click", () => {
-cartModal.style.display = "none";
-});
-cartModal.addEventListener("click", (e) => {
-if (e.target === cartModal) {
-cartModal.style.display = "none";
+App.elements.cartFloating.addEventListener( "click", openCart );
+function closeCart() {
+App.elements.cartModal.classList.remove("show");
+App.state.activeModal = null;
+}
+App.elements.closeCart.addEventListener(
+"click", closeCart);
+App.elements.cartModal.addEventListener( "click", (event) => { 
+if (event.target === App.elements.cartModal) { closeCart();
 } });
-const sections =
-document.querySelectorAll(
-".product-section"
+function initProductEvents() {
+Object.values(App.elements.grids).forEach((grid) => {
+grid.addEventListener("click", (event) => {
+const card = event.target.closest(".product-card");
+if (!card) return;
+const product = App.products.find(
+(item) => item.id === card.dataset.id
 );
-sections.forEach(
-(section) => {
-const grid =
-section.querySelector(
-".product-grid"
-);
-const leftBtn =
-section.querySelector(
-".scroll-left"
-);
-const rightBtn =
-section.querySelector(
-".scroll-right"
-);
-rightBtn.addEventListener(
+if (!product) return;
+if (event.target.closest(".add-cart-btn")) {
+addToCart(product);
+return;
+}
+openModal(product);
+});
+});
+}
+function getStatusText(status) {
+switch (status) {
+case "available":
+return "موجود";
+case "unavailable":
+return "ناموجود";
+default:
+return "نامشخص";
+}
+}
+function getStatusClass(status) {
+switch (status) {
+case "available":
+return "status-available";
+case "unavailable":
+return "status-unavailable";
+default:
+return "status-unknown";
+}
+}
+function closeModal() {
+App.elements.productModal.classList.remove("show");
+App.state.activeModal = null;
+}
+App.elements.closeProduct.addEventListener(
 "click",
-() => {
-grid.scrollBy({
-left: 350,
-behavior: "smooth"
-});
-});
-leftBtn.addEventListener(
-"click",
-() => {
-grid.scrollBy({
-left: -350,
-behavior: "smooth"
-});
-});
-updateScrollButtons(
-grid,
-leftBtn,
-rightBtn,
+closeModal
 );
-grid.addEventListener(
-"scroll",
-() => {
-updateScrollButtons(
-grid,
-leftBtn,
-rightBtn,
-);
+App.elements.productModal.addEventListener("click", (event) => {
+if (event.target === App.elements.productModal) {
+closeModal();
 }
-);
-window.addEventListener(
-"resize",
-() => {
-updateScrollButtons(
-grid,
-leftBtn,
-rightBtn,
-);
-}
-);
 });
-function updateScrollButtons(
-grid,
-leftBtn,
-rightBtn
-){
-const hasScroll =
-grid.scrollWidth >
-grid.clientWidth;
-if(hasScroll){
-leftBtn.style.display = "block";
-rightBtn.style.display = "block";
-}else{
-leftBtn.style.display = "none";
-rightBtn.style.display = "none";
+document.addEventListener("keydown", (event) => {
+if ( event.key === "Escape" && App.elements.searchOverlay.classList.contains("show") ) { closeSearch(); }
+if ( event.key === "Escape") { if (App.state.activeModal === "product") {
+closeModal();
+} 
+if (App.state.activeModal === "cart") {
+closeCart();
 }
 }
-} );
+});
+renderProducts();
+initProductEvents();
 
+function addToCart(product) {
+const item = App.cart.find(
+(item) => item.id === product.id
+);
+if (item) {
+item.quantity++;
+} else {
+App.cart.push({
+id: product.id,
+quantity: 1
+});
+} 
+updateCartCount();
+saveCart();
+}
+function updateCartCount() {
+const total = App.cart.reduce(
+(sum, item) => sum + item.quantity, 0 );
+App.elements.cartCount.textContent = total;
+renderCart();
+}
+function renderCart() {
+if (App.cart.length === 0) {
+App.elements.clearCartBtn.style.display = "none";
+App.elements.cartItems.innerHTML = `
+<p class="empty-cart"> محصولی وجود ندارد </p> `;
+return;
+ }
+ App.elements.clearCartBtn.style.display = "block";
+App.elements.cartItems.innerHTML = "";
+App.cart.forEach((cartItem) => {
+const cartRow = createCartItem(cartItem);
+if (cartRow) {
+App.elements.cartItems.appendChild(cartRow);
+ }
+ });
+ }
+function createCartItem(cartItem) {
+const product = App.products.find( (item) => item.id === cartItem.id );
+if (!product) return null;
+const row = document.createElement("div");
+row.className = "cart-row";
+row.dataset.id = cartItem.id;
+row.innerHTML = ` 
+<h3>${product.name}</h3>
+<div class="cart-controls">
+<button class="decrease-btn">-</button>
+<span>${cartItem.quantity}</span>
+<button class="increase-btn">+</button>
+</div>
+`;
+return row;
+}
+function increaseCartItem(id) {
+const item = App.cart.find((item) => item.id === id);
+if (!item) return;
+item.quantity++;
+updateCartCount();
+saveCart();
+}
+function decreaseCartItem(id) {
+const item = App.cart.find((item) => item.id === id);
+if (!item) return;
+item.quantity--;
+if (item.quantity <= 0) {
+App.cart = App.cart.filter((item) => item.id !== id);
+}
+updateCartCount();
+saveCart();
+}
+function clearCart() {
+App.cart = [];
+updateCartCount();
+saveCart();
+}
+App.elements.cartItems.addEventListener("click", (event) => {
+const row = event.target.closest(".cart-row");
+if (!row) return;
+const id = row.dataset.id;
+if (event.target.closest(".increase-btn")) {
+increaseCartItem(id);
+return;
+}
+if (event.target.closest(".decrease-btn")) {
+decreaseCartItem(id);
+}
+});
+App.elements.clearCartBtn.addEventListener("click", () => {
+clearCart();
+});
+function saveCart() {
+const data = {
+cart: App.cart
+};
+localStorage.setItem(
+"to-data",
+JSON.stringify(data)
+);
+}
+function loadCart() {
+const savedCart = localStorage.getItem("to-data");
+if (!savedCart) return;
+const data = JSON.parse(savedCart);
+App.cart = data.cart || [];
+updateCartCount();
+}
+loadCart();
+function openSearch() {
+
+App.elements.searchOverlay.classList.add("show");
+App.elements.searchResults.innerHTML = "";
+
+}
+function closeSearch() {
+App.elements.searchOverlay.classList.remove("show");
+App.elements.searchInput.value = "";
+App.state.search = "";
+App.elements.searchResults.innerHTML = "";
+App.elements.searchInput.blur();
+}
+function filterProducts() { const search = App.state.search .toLowerCase() .trim();
+if (search.length <2) { App.elements.searchResults.innerHTML = "";
+return;
+}
+const filteredProducts = App.products.filter((product) => { return product.name .toLowerCase() .includes(search);
+});
+renderSearchResults(filteredProducts);
+
+
+}
+function renderSearchResults(products) {
+App.elements.searchResults.innerHTML = "";
+if (products.length === 0) {
+App.elements.searchResults.innerHTML = `
+<div class="empty-search"> محصولی یافت نشد </div>
+`;
+return;
+}
+products.forEach((product) => { 
+const item = document.createElement("div");
+item.className = "search-item";
+item.dataset.id = product.id;
+item.innerHTML = `
+<img src="${product.image}" alt="${product.name}">
+<div class="search-item-info">
+<h3>${product.name}</h3>
+<span>${getStatusText(product.status)}</span>
+</div>
+`;
+App.elements.searchResults.appendChild(item);
+});
+}
+App.elements.searchResults.addEventListener("click", (event) => {
+const item = event.target.closest(".search-item");
+if (!item) return;
+const product = App.products.find( (product) => product.id === item.dataset.id );
+if (!product) return;
+closeSearch();
+openModal(product);
+});
+});
