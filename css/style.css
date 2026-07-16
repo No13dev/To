@@ -846,11 +846,23 @@ color:#bbb;
 width:9px;
 height:9px;
 border-radius:50%;
-border:1px solid currentColor;
-opacity:.3s;
+border:1px solid #555;
+background:transparent;
 }
-.dot.fill{
-opacity:1;
+.dot.fill.green{
+background:#49b675;
+border-color:#49b675;
+box-shadow:0 0 6px rgba(73,182,117,.4);
+}
+.dot.fill.yellow{
+background:#d4b74d;
+border-color:#d4b74d;
+box-shadow: 0 0 6px rgba(212,183,77,.4);
+}
+.dot.fill.orange{
+background:#d17b32;
+border-color:#d17b32;
+box-shadow:0 0 6px rgba(209,123,50,.4);
 }
 .dot.green{
 color:#49b675;
