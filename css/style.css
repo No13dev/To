@@ -51,7 +51,7 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 direction: ltr;
-padding: 22px 25px;
+padding:18px clamp(16px,4vw,28px);
 background: rgba(5,5,5,.75);
 backdrop-filter: blur(16px);
 -webkit-backdrop-filter: blur(16px);
@@ -83,6 +83,12 @@ opacity:1;
 visibility:visible;
 pointer-events:auto;
 }
+.product-content{
+display:flex;
+flex-direction:column;
+padding:18px;
+flex:1;
+} 
 .search-results{
 width:min(650px,90%);
 max-height:70vh;
@@ -94,9 +100,7 @@ padding:12px;
 display:flex;
 flex-direction:column;
 gap:10px;
-z-index:1001;
-}
-search-results{
+z-index:700;
 overflow-x:hidden;
 }
 .search-item{
@@ -180,7 +184,7 @@ opacity:0;
 visibility:hidden;
 pointer-events:none;
 transition:.3s;
-z-index:150 ;
+z-index:500 ;
 }
 .menu-overlay.show{
 opacity:1;
@@ -215,7 +219,8 @@ border-left:
 1px solid rgba(255,255,255,.08);
 padding: 100px 28px;
 transition: .35s ease;
-z-index: 200;
+z-index: 600;
+overscroll-behavior:contain;
 }
 .side-menu.show{
 right: 0;
@@ -224,7 +229,7 @@ right: 0;
 position: absolute;
 top: 30px;
 left: 30px;
-font-size: 30px;
+font-size: 12px;
 cursor: pointer;
 }
 .side-nav{
@@ -297,7 +302,7 @@ display: flex;
 justify-content:center;
 align-items: center;
 width:100%;
-min-height: 100vh;
+min-height: 100svh;
 overflow:hidden;
 padding: 90px 20px 40px;
 isolation:isolate;
@@ -370,6 +375,28 @@ flex-direction:column;
 align-items:center;
 justify-content:center;
 }
+.story-text{
+opacity:0;
+transform:translateY(20px);
+transition:.5s;
+font-size:1rem;
+color:#fff;
+text-align:center;
+max-width:320px;
+}
+.story-text.show{
+opacity:1;
+transform:translateY(0);
+}
+.story-dot{
+opacity:0;
+font-size:26px;
+color:#caa46b;
+transition:.5s;
+}
+.story-dot.show{
+opacity:1;
+}
 .story-title{
 font-size:clamp(2rem,5vw,3rem);
 font-weight:700;
@@ -378,8 +405,9 @@ text-align:center;
 margin-bottom:70px;
 }
 .timeline{
+gap:20px;
 width:100%;
-max-width:500px;
+max-height:220px;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -395,8 +423,10 @@ color:#fff;
 }
 .product-grid{
 display: flex;
-gap: 30px;
+gap: 24px;
 overflow-x: auto;
+padding:10px 60px 20px;
+scroll-padding:60px;
 align-items:stretch;
 scroll-behavior: smooth;
 padding-bottom: 15px;
@@ -413,7 +443,7 @@ inset:0;
 justify-content:center;
 align-items:center;
 background: rgba(0,0,0,.8);
-z-index:1000;
+z-index:800;
 }
 .product-modal.show{
 display:flex;
@@ -440,6 +470,8 @@ display:flex;
 flex-direction:column;
 width:90%;
 max-width:420px;
+max-height:90vh;
+overflow-y:auto;
 padding:30px;
 border-radius:24px;
 background:rgba(20,20,20,.85);
@@ -491,8 +523,14 @@ border-radius: 50px;
 background: rgba(255,255,255,.08);
 backdrop-filter:blur(16px);
 color: white;
+transition: opacity .3s, transform .3s, background .3s;
 font-size: 22px;
 cursor: pointer;
+z-index:20;
+}
+.scroll-left[style*="opacity"],
+.scroll-right[style*="opacity"]{
+pointer-events:auto;
 }
 .scroll-left{
 left: 5px;
@@ -543,7 +581,10 @@ display: none;
 justify-content: center;
 align-items: center;
 background: rgba(0,0,0,.85);
-z-index: 1010;
+z-index: 900;
+}
+.order-modal.show{
+display:flex;
 }
 .order-content{
 width: 90%;
@@ -641,7 +682,16 @@ transition:.3s;
 opacity:.7;
 transform:rotate(90deg);
 }
-
+.cart-items{
+max-height:350px;
+overflow-y:auto;
+}
+.phone{
+background:#1d1d1d;
+}
+.phone:hover{
+background:#2f2f2f;
+}
 
 
 
@@ -665,7 +715,7 @@ border: 1px solid rgba(255,255,255,.08);
 backdrop-filter: blur(10px);
 font-size: 28px;
 cursor: pointer;
-z-index: 1100;
+z-index: 1000;
 }
 .cart-floating:hover{
 transform:scale(1.08);
@@ -756,10 +806,29 @@ transform:scale(1.08);
 }
 .footer{
 text-align: center;
-padding: 80px 20px;
+padding: 20px 20px;
 border-top: 1px solid rgba(255,255,255,.08);
 background:#080808;
 color:#bfbfbf;
 font-size:.95rem;
+}
+.order-btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:14px 34px;
+border-radius:999px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.12);
+backdrop-filter:blur(14px);
+color:#fff;
+font-size:16px;
+font-weight:500;
+transition:.3s;
+box-shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+.order-btn:hover{
+background:rgba(255,255,255,.14);
+transform:translateY(-2px);
 }
 

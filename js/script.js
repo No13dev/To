@@ -2,7 +2,7 @@ document.addEventListener(
 "DOMContentLoaded",
 () => {
 const App = {
-products: [ {
+products:[ {
 id: "virginia-gold",
 category: "tobacco",
 name: "ویرجینیا طلایی",
@@ -59,7 +59,7 @@ order: 6
 {
 id: "marlborored",
 category: "tobacco",
-name: "ویرجینیا طلایی",
+name: "ماربورو قرمز",
 image: "images/marlborored.webp",
 description: "توتون ماربورو رد توتون اصیل و خالص با طعمی تلخ برای سسلیقه خاص",
 status: "available",
@@ -78,6 +78,10 @@ document.querySelectorAll(".product-grid").forEach((grid) => {
 const category = grid.dataset.category;
 App.elements.grids[category] = grid;
 });
+App.elements.timeline = document.getElementById("timeline");
+App.elements.orderModal = document.getElementById("order-modal");
+App.elements.orderBtn = document.getElementById("order-btn");
+App.elements.closeOrder = document.querySelector(".close-order");
 App.elements.menuOverlay = document.getElementById("menu-overlay");
 App.elements.menuBtn = document.getElementById("menu-btn");
 App.elements.sideMenu = document.getElementById("side-menu");
@@ -105,9 +109,23 @@ App.elements.searchInput.addEventListener("input", (event) => {
 App.state.search = event.target.value;
 filterProducts();
 });
+const storyItems = [ 
+[ "سال ها پیش",
+"شروع ایده"
+],
+[ 
+"بعد از چند سال",
+"اولین فروش و افتتاح فروشگاه"
+],
+[ 
+"امروز",
+"خانواده تو"
+]
+];
 App.elements.searchOverlay.addEventListener("click", (event) => {
 if (event.target === App.elements.searchOverlay) { closeSearch(); } });
 function renderProducts(products = App.products) {
+products = [...products].sort((a, b) => a.order - b.order);
 Object.values(App.elements.grids).forEach((grid) => {
 grid.innerHTML = "";
 });
@@ -131,12 +149,28 @@ document.querySelectorAll(".product-section").forEach((section) => {
 const grid = section.querySelector(".product-grid");
 const left = section.querySelector(".scroll-left");
 const right = section.querySelector(".scroll-right");
-left.addEventListener("click", ()=>{
-grid.scrollBy({ left:-320, behavior:"smooth" });
+if (!grid || !left || !right) return;
+left.addEventListener("click", () => {
+grid.scrollBy({ left: -320, behavior: "smooth"
 });
-right.addEventListener("click", ()=> { 
-grid.scrollBy({ right:320, behavior:"smooth" });
 });
+right.addEventListener("click", () => {
+grid.scrollBy({ left: 320, behavior: "smooth"
+});
+});
+function updateButtons() {
+const hasScroll = grid.scrollWidth > grid.clientWidth;
+if (hasScroll) {
+left.style.display = "block";
+right.style.display = "block";
+}else{ 
+left.style.display = "none";
+right.style.display = "none";
+}
+}
+updateButtons();
+grid.addEventListener("scroll", updateButtons);
+window.addEventListener("resize",updateButtons);
 });
 }
 function closeMenu() {
@@ -151,7 +185,25 @@ if (App.elements.sideMenu.classList.contains("show")) { return; }
 App.elements.sideMenu.classList.add("show");
 App.elements.menuOverlay.classList.add("show");
 document.body.style.overflow = "hidden";
- }
+}
+function openOrder() {
+App.elements.orderModal.classList.add("show");
+App.state.activeModal = "order";
+
+}
+App.elements.orderBtn.addEventListener( "click", openOrder);
+function closeOrder() {
+App.elements.orderModal.classList.remove("show");
+App.state.activeModal = null;
+
+}
+App.elements.closeOrder.addEventListener("click", closeOrder);
+App.elements.orderModal.addEventListener("click", (event) => {
+if (event.target === App.elements.orderModal) {
+closeOrder();
+}
+}
+);
 function toggleProductsMenu() {
 App.elements.productsMenu.classList.toggle("show");
 }
@@ -446,4 +498,40 @@ if (!product) return;
 closeSearch();
 openModal(product);
 });
+let storyIndex = 0;
+let storyTimer;
+function playStory(){
+const timeline = App.elements.timeline;
+timeline.innerHTML = "";
+const first = document.createElement("p");
+first.className = "story-text";
+first.textContent = storyItems[storyIndex][0];
+const dot = document.createElement("div");
+dot.className = "story-dot";
+dot.textContent = "⏺";
+const second = document.createElement("p");
+second.className = "story-text";
+second.textContent = storyItems[storyIndex][1];
+timeline.append(first);
+setTimeout(()=>{
+first.classList.add("show");
+},200);
+setTimeout(()=>{
+timeline.append(dot);
+dot.classList.add("show");
+},1200);
+setTimeout(()=>{
+timeline.append(second);
+second.classList.add("show");
+},2200);
+setTimeout(()=>{
+timeline.innerHTML="";
+storyIndex++;
+if(storyIndex>=storyItems.length){
+storyIndex=0;
+}
+playStory();
+},5500);
+}
+playStory();
 });

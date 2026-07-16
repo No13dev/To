@@ -1,0 +1,26 @@
+<section id="to" class="about-to">
+<button class="about-btn"> آشنایی با تــو
+</button>
+</section>
+
+
+
+<video id="video-player" class="video-player" controls ></video>
+<div class="video-modal">
+<div class="video-content">
+<span class="close-video"> ✖ </span>
+<button class="prev-video"> ⬅ </button>
+<button class="next-video"> ➡ </button>
+</div>
+</div>
+
+
+
+
+<div class="about-modal" id="about-modal">
+<div class="about-content">
+<span class="close-about">
+✖
+</span>
+</div>
+</div>
