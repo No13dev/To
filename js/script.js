@@ -8,7 +8,7 @@ category: "tobacco",
 name: "توتون ویرجینیا طلایی",
 image: "images/virginiagold.webp",
 description: "ویرجینیا طلایی با عطر و طعم مزرعه و اصالت",
-price: 300000,
+price: "300,000T",
 nicotine: 1 ,
 status: "available",
 order: 1
