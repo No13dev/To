@@ -499,8 +499,10 @@ closeSearch();
 openModal(product);
 });
 let storyIndex = 0;
-let storyTimer;
+let storyTimers = [];
 function playStory(){
+storyTimers.forEach(clearTimeout);
+storyTimers = [];
 const timeline = App.elements.timeline;
 timeline.innerHTML = "";
 const first = document.createElement("p");
@@ -508,22 +510,26 @@ first.className = "story-text";
 first.textContent = storyItems[storyIndex][0];
 const dot = document.createElement("div");
 dot.className = "story-dot";
-dot.textContent = "⏺";
+dot.textContent = "⬇";
 const second = document.createElement("p");
 second.className = "story-text";
 second.textContent = storyItems[storyIndex][1];
 timeline.append(first);
+storyTimers.push(
 setTimeout(()=>{
 first.classList.add("show");
-},200);
+},200));
+storyTimers.push(
 setTimeout(()=>{
 timeline.append(dot);
 dot.classList.add("show");
-},1200);
+},1200));
+storyTimers.push(
 setTimeout(()=>{
 timeline.append(second);
 second.classList.add("show");
-},2200);
+},2200));
+storyTimers.push(
 setTimeout(()=>{
 timeline.innerHTML="";
 storyIndex++;
@@ -531,7 +537,25 @@ if(storyIndex>=storyItems.length){
 storyIndex=0;
 }
 playStory();
-},5500);
+},5500));
 }
+function resetStory(){
+storyTimers.forEach(clearTimeout);
+storyTimers = [];
+storyIndex = 0;
+App.elements.timeline.innerHTML = "";
+}
+const observer = new IntersectionObserver((entries)=>{
+entries.forEach((entry)=>{
+if(entry.isIntersecting){
+resetStory();
 playStory();
+}else{
+resetStory();
+}
+});
+},{
+threshold:0.5
+});
+observer.observe(document.querySelector(".story"));
 });
