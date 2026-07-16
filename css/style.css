@@ -331,7 +331,7 @@ padding:20px;
 }
 .hero-title{
 color:white;
-font-size:clamp(2rem,5vw,3.5rem);
+font-size:clamp(2rem,3vw,3.5rem);
 margin-bottom:15px;
 text-shadow: 0 0 20px rgba(255,255,255,.08);
 }
@@ -831,4 +831,33 @@ box-shadow: 0 8px 30px rgba(0,0,0,.35);
 background:rgba(255,255,255,.14);
 transform:translateY(-2px);
 }
-
+.nicotine{
+display:flex;
+align-items:center;
+gap:6px;
+margin-top:10px;
+flex-wrap:wrap;
+}
+.nicotine-text{
+font-size:.8rem;
+color:#bbb;
+}
+.dot{
+width:9px;
+height:9px;
+border-radius:50%;
+border:1px solid currentColor;
+opacity:.3s;
+}
+.dot.fill{
+opacity:1;
+}
+.dot.green{
+color:#49b675;
+}
+.dot.yellow{
+color:#d4b74d;
+}
+.dot.orange{
+color:#d17b32;
+}

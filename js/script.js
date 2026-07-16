@@ -5,63 +5,77 @@ const App = {
 products:[ {
 id: "virginia-gold",
 category: "tobacco",
-name: "ویرجینیا طلایی",
+name: "توتون ویرجینیا طلایی",
 image: "images/virginiagold.webp",
 description: "ویرجینیا طلایی با عطر و طعم مزرعه و اصالت",
+price: 300000,
+nicotine: 1 ,
 status: "available",
 order: 1
 } , 
 {
 id: "marlboro-gold",
 category: "tobacco",
-name: "ماربورو طلایی",
+name: "توتون ماربورو طلایی",
 image: "images/marlborogold.webp",
 description: "توتون ماربورو طلایی اصیل ",
+price: 300000,
+nicotine:2 ,
 status: "available",
 order: 2
 } ,
 {
 id: "winston",
 category: "tobacco",
-name: "وینستون",
+name: "توتون وینستون",
 image: "images/winston.webp",
 description: "توتون وینستون توتون قدیمی و اصیل",
+price: 300000,
+nicotine: 3 ,
 status: "available",
 order: 3
 } ,
 {
 id: "ese",
 category: "tobacco",
-name: "اسی",
+name: "توتون اسی",
 image: "images/ese.webp",
 description: "توتون اسی توتون متعادل با بافت تیره",
+price: 300000,
+nicotine: 4,
 status: "unavailable",
 order: 4
 } ,
 {
 id: "jungle",
 category: "tobacco",
-name: "جنگلی",
+name: "توتون جنگلی",
 image: "images/jangali.webp",
 description: "توتون جنگلی سیگار اختصاصی تو",
+price: 300000,
+nicotine: 5,
 status: "available",
 order: 5
 } ,
 {
 id: "koba",
 category: "tobacco",
-name: "کوبا",
+name: "توتون کوبا",
 image: "images/koba.webp",
 description: "توتون کوبا توتون اصیل کوبایی با رایحه و طعم خاص",
+price: 500000,
+nicotine: 6,
 status: "available",
 order: 6
 } ,
 {
 id: "marlborored",
 category: "tobacco",
-name: "ماربورو قرمز",
+name: "توتون ماربورو قرمز",
 image: "images/marlborored.webp",
 description: "توتون ماربورو رد توتون اصیل و خالص با طعمی تلخ برای سسلیقه خاص",
+price: 300000,
+nicotine: 12,
 status: "available",
 order: 7
 }],
@@ -78,6 +92,8 @@ document.querySelectorAll(".product-grid").forEach((grid) => {
 const category = grid.dataset.category;
 App.elements.grids[category] = grid;
 });
+App.elements.productPrice = document.getElementById("product-price");
+App.elements.productNicotine = document.getElementById("product-nicotine");
 App.elements.timeline = document.getElementById("timeline");
 App.elements.orderModal = document.getElementById("order-modal");
 App.elements.orderBtn = document.getElementById("order-btn");
@@ -227,6 +243,8 @@ loading="lazy"
 >
 <div class="product-content">
 <h3 class="product-title">${product.name}</h3>
+<div class="nicotine"> ${createNicotine(product.nicotine)}
+</div>
 <p class="product-status ${getStatusClass(product.status)}">
 ${getStatusText(product.status)}
 </p>
@@ -246,6 +264,8 @@ App.elements.productImage.src = product.image;
 App.elements.productImage.alt = product.name;
 App.elements.productTitle.textContent = product.name;
 App.elements.productDescription.textContent = product.description;
+App.elements.productPrice.textContent = product.price;
+App.elements.productNicotine.innerHTML = createNicotine(product.nicotine);
 App.elements.productStatus.className = `product-status ${getStatusClass(product.status)}`;
 App.elements.productModal.classList.add("show");
 App.state.activeModal = "product";
@@ -300,6 +320,22 @@ default:
 return "نامشخص";
 }
 }
+function createNicotine(level){
+let color = "green";
+if(level >= 3 && level <= 4){
+color = "yellow";
+}
+if (level >= 5){
+color = "orange";
+}
+let html = ` <span class="nicotine-text">نیکوتین</span>`;
+for(let i = 1 ; i <= 5; i++){
+html += `
+<span class="dot ${color} ${i <= level ? "fill" : ""}">
+</span> `;
+}
+return html;
+} 
 function getStatusClass(status) {
 switch (status) {
 case "available":
