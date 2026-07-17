@@ -580,7 +580,6 @@ const timeline = App.elements.timeline;
 timeline.innerHTML = "";
 const first = document.createElement("p");
 first.className = "story-text";
-first.textContent = "";
 const dot1 = document.createElement("div");
 dot1.className = "story-dot";
 dot1.textContent = ".";
@@ -589,30 +588,26 @@ dot2.className = "story-dot";
 dot2.textContent = ".";
 const second = document.createElement("p");
 second.className = "story-text";
-second.textContent = "";
-timeline.append(first);
+timeline.append(first,dot1,dot2,second);
 storyTimers.push(
 setTimeout(()=>{
 first.classList.add("show");
 typeText(
 first,
-storyItems[storyIndex][0], 65 );
+storyItems[storyIndex][0], 55 );
 },200));
 storyTimers.push(
 setTimeout(()=>{
-timeline.append(dot1);
 dot1.classList.add("show");
 },1800));
 storyTimers.push(
 setTimeout(()=>{
-timeline.append(dot2);
 dot2.classList.add("show");
 },2400));
 storyTimers.push(
 setTimeout(()=>{
-timeline.append(second);
 second.classList.add("show");
-typeText(second, storyItems[storyIndex][1],65);
+typeText(second, storyItems[storyIndex][1],55); 
 },3000));
 storyTimers.push(
 setTimeout(()=>{
