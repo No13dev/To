@@ -304,9 +304,10 @@ display: flex;
 justify-content:center;
 align-items: center;
 width:100%;
-min-height: 100dvh;
+height: 100svh;
 overflow:hidden;
-padding: 90px 20px 40px;
+padding-top: 90px;
+padding-bottom:0;
 isolation:isolate;
 }
 @media (min-width:768px){
@@ -371,10 +372,11 @@ transform:translateY(-2px);
 
 .story{
 position:relative;
-min-height:70vh;
+min-height:92svh;
 padding:90px 25px;
 display:flex;
 flex-direction:column;
+justify-content:center;
 align-items:center;
 overflow:hidden;
 isolation:isolate;
@@ -418,7 +420,7 @@ transform:translateY(0);
 .story-text::after{
 content:"|";
 display:inline-block;
-margin-right:4px;
+margin-right:3px;
 color:#c8a062;
 animation: blink .8s infinite;
 }
