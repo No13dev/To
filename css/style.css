@@ -9,10 +9,10 @@ scroll-behavior: smooth;
 body{
 background-image: url("../images/background-mobile.webp");
 background-size: cover;
-background-position: center center;
+background-position: center top;
 background-attachment: fixed;
 background-repeat: no-repeat;
-color: #e5e5e5;
+background-color: #080808;
 font-family: 'Vazirmatn' , sans-serif;
 min-height:100vh;
 overflow-x:hidden;
