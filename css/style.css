@@ -1,4 +1,4 @@
-*{
+  *{
 margin: 0;
 padding: 0;
 box-sizing: border-box;
@@ -370,31 +370,73 @@ transform:translateY(-2px);
 
 
 .story{
-min-height:100vh;
-padding:100px 25px;
+position:relative;
+min-height:70vh;
+padding:90px 25px;
 display:flex;
 flex-direction:column;
 align-items:center;
-justify-content:center;
+overflow:hidden;
+isolation:isolate;
+background-image:url("../images/story-mobile.webp");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+}
+@media (min-width:768px){ 
+.story{
+background-image:url("../images/story-desktop.webp");
+}
+}
+.story::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(180deg),rgba(0,0,0,.65),rgba(0,0,0,.45);
+z-index:0;
+}
+.story>*{
+position:relative;
+z-index:2;
 }
 .story-text{
 opacity:0;
 transform:translateY(20px);
-transition:.5s;
-font-size:1rem;
+transition:opacity .5s,transform .5s;
+font-size:clamp(1.3rem,3vw,1.8rem);
+line-height:2.1;
+letter-spacing:.5px;
+font-weight:500;
 color:#fff;
 text-align:center;
-max-width:320px;
+max-width:620px;
 }
 .story-text.show{
 opacity:1;
 transform:translateY(0);
 }
-.story-dot{
+.story-text::after{
+content:"|";
+display:inline-block;
+margin-right:4px;
+color:#c8a062;
+animation: blink .8s infinite;
+}
+@keyframes blink{
+0%,50%{
+opacity:1;
+}
+51%,100%{
 opacity:0;
-font-size:26px;
-color:#caa46b;
-transition:.5s;
+}
+}
+.story-text.done::after{
+display:none;
+}
+.story-dot{
+animation:floatArrow 1.3s infinite;
+font-size:32px;
+color:#c8a062;
 }
 .story-dot.show{
 opacity:1;
@@ -489,7 +531,7 @@ border-radius:12px;
 margin-bottom:25px;
 }
 .product-card{
-flex:0 0 185px;
+flex:0 0 195px;
 display: flex;
 flex-direction: column;
 border: 1px solid rgba(255,255,255,.08);
@@ -516,7 +558,7 @@ font-size:.95rem;
 .scroll-left,
 .scroll-right{
 position: absolute;
-top: 58%;
+top: 50%;
 transform: translateY(-50%);
 width: 44px;
 height: 44px;
@@ -940,5 +982,17 @@ transition:.3s;
 .footer-address:hover{
 color:#fff;
 }
-
-
+@keyframes floatArrow{
+0%{
+transform:translateY(0);
+opacity:.5;
+}
+50%{
+transform:translateY(8px);
+opacity:.1;
+}
+100%{
+transform:translateY(0);
+opacity:.5;
+}
+}

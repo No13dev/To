@@ -553,8 +553,26 @@ if (!product) return;
 closeSearch();
 openModal(product);
 });
+let typingTimer = null;
+let storyPlaying = false;
 let storyIndex = 0;
 let storyTimers = [];
+function typeText(element, text, speed = 40){
+element.classList.remove("done");
+element.textContent = "";
+let index = 0;
+const timer = setInterval(()=>{
+element.textContent += text[index];
+index++;
+if(index >= text.length){
+clearInterval(timer);
+element.classList.add("done");
+
+}
+}, speed);
+
+
+}
 function playStory(){
 storyTimers.forEach(clearTimeout);
 storyTimers = [];
@@ -562,28 +580,40 @@ const timeline = App.elements.timeline;
 timeline.innerHTML = "";
 const first = document.createElement("p");
 first.className = "story-text";
-first.textContent = storyItems[storyIndex][0];
-const dot = document.createElement("div");
-dot.className = "story-dot";
-dot.textContent = "⬇";
+first.textContent = "";
+const dot1 = document.createElement("div");
+dot1.className = "story-dot";
+dot1.textContent = ".";
+const dot2 = document.createElement("div");
+dot2.className = "story-dot";
+dot2.textContent = ".";
 const second = document.createElement("p");
 second.className = "story-text";
-second.textContent = storyItems[storyIndex][1];
+second.textContent = "";
 timeline.append(first);
 storyTimers.push(
 setTimeout(()=>{
 first.classList.add("show");
+typeText(
+first,
+storyItems[storyIndex][0], 65 );
 },200));
 storyTimers.push(
 setTimeout(()=>{
-timeline.append(dot);
-dot.classList.add("show");
-},1200));
+timeline.append(dot1);
+dot1.classList.add("show");
+},1800));
+storyTimers.push(
+setTimeout(()=>{
+timeline.append(dot2);
+dot2.classList.add("show");
+},2400));
 storyTimers.push(
 setTimeout(()=>{
 timeline.append(second);
 second.classList.add("show");
-},2200));
+typeText(second, storyItems[storyIndex][1],65);
+},3000));
 storyTimers.push(
 setTimeout(()=>{
 timeline.innerHTML="";
@@ -592,20 +622,25 @@ if(storyIndex>=storyItems.length){
 storyIndex=0;
 }
 playStory();
-},5500));
+},6500));
 }
 function resetStory(){
 storyTimers.forEach(clearTimeout);
 storyTimers = [];
+clearInterval(typingTimer);
 storyIndex = 0;
 App.elements.timeline.innerHTML = "";
 }
 const observer = new IntersectionObserver((entries)=>{
 entries.forEach((entry)=>{
 if(entry.isIntersecting){
+if(!storyPlaying){
+storyPlaying=true
 resetStory();
 playStory();
+}
 }else{
+storyPlaying=false;
 resetStory();
 }
 });
