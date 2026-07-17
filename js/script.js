@@ -8,7 +8,7 @@ category: "tobacco",
 name: "توتون ویرجینیا طلایی",
 image: "images/virginiagold.webp",
 description: "ویرجینیا طلایی با عطر و طعم مزرعه و اصالت",
-price: "300,000T",
+price: "۳۰۰,۰۰۰ تومان",
 nicotine: 1 ,
 status: "available",
 order: 1
@@ -19,7 +19,7 @@ category: "tobacco",
 name: "توتون ماربورو طلایی",
 image: "images/marlborogold.webp",
 description: "توتون ماربورو طلایی اصیل ",
-price: 300000,
+price: "۳۰۰,۰۰۰ تومان",
 nicotine:2 ,
 status: "available",
 order: 2
@@ -30,7 +30,7 @@ category: "tobacco",
 name: "توتون وینستون",
 image: "images/winston.webp",
 description: "توتون وینستون توتون قدیمی و اصیل",
-price: 300000,
+price: "۳۰۰,۰۰۰ تومان",
 nicotine: 3 ,
 status: "available",
 order: 3
@@ -41,7 +41,7 @@ category: "tobacco",
 name: "توتون اسی",
 image: "images/ese.webp",
 description: "توتون اسی توتون متعادل با بافت تیره",
-price: 300000,
+price: "۳۰۰,۰۰۰ تومان",
 nicotine: 4,
 status: "unavailable",
 order: 4
@@ -52,7 +52,7 @@ category: "tobacco",
 name: "توتون جنگلی",
 image: "images/jangali.webp",
 description: "توتون جنگلی سیگار اختصاصی تو",
-price: 300000,
+price: "۳۰۰,۰۰۰ تومان",
 nicotine: 5,
 status: "available",
 order: 5
@@ -63,7 +63,7 @@ category: "tobacco",
 name: "توتون کوبا",
 image: "images/koba.webp",
 description: "توتون کوبا توتون اصیل کوبایی با رایحه و طعم خاص",
-price: 500000,
+price: "۳۰۰,۰۰۰ تومان",
 nicotine: 6,
 status: "available",
 order: 6
@@ -74,7 +74,7 @@ category: "tobacco",
 name: "توتون ماربورو قرمز",
 image: "images/marlborored.webp",
 description: "توتون ماربورو رد توتون اصیل و خالص با طعمی تلخ برای سسلیقه خاص",
-price: 300000,
+price: "۳۰۰,۰۰۰ تومان",
 nicotine: 12,
 status: "available",
 order: 7
@@ -92,6 +92,8 @@ document.querySelectorAll(".product-grid").forEach((grid) => {
 const category = grid.dataset.category;
 App.elements.grids[category] = grid;
 });
+App.elements.productPrice = document.getElementById("product-price");
+App.elements.toastContainer = document.querySelector(".toast-container");
 App.elements.productPrice = document.getElementById("product-price");
 App.elements.productNicotine = document.getElementById("product-nicotine");
 App.elements.timeline = document.getElementById("timeline");
@@ -243,6 +245,7 @@ loading="lazy"
 >
 <div class="product-content">
 <h3 class="product-title">${product.name}</h3>
+<p class="product-pice">${product.price}</p>
 <div class="nicotine"> ${createNicotine(product.nicotine)}
 </div>
 <p class="product-status ${getStatusClass(product.status)}">
@@ -263,6 +266,7 @@ function openModal(product) {
 App.elements.productImage.src = product.image;
 App.elements.productImage.alt = product.name;
 App.elements.productTitle.textContent = product.name;
+App.elements.productPrice.textContent = product.price;
 App.elements.productDescription.textContent = product.description;
 App.elements.productPrice.textContent = product.price;
 App.elements.productNicotine.innerHTML = createNicotine(product.nicotine);
@@ -373,7 +377,21 @@ closeCart();
 renderProducts();
 initProductEvents();
 initScrollButtons();
-
+function showToast(message){
+const toast = document.createElement("div");
+toast.className = "toast";
+toast.textContent = message;
+App.elements.toastContainer.appendChild(toast);
+requestAnimationFrame(()=>{
+toast.classList.add("show");
+});
+setTimeout(()=>{
+toast.classList.remove("show");
+setTimeout(()=>{
+toast.remove();
+},350);
+},2000);
+}
 function addToCart(product) {
 const item = App.cart.find(
 (item) => item.id === product.id
@@ -388,6 +406,7 @@ quantity: 1
 } 
 updateCartCount();
 saveCart();
+showToast(`${product.name} ✔به سبد اضافه شد` );
 }
 function updateCartCount() {
 const total = App.cart.reduce(
