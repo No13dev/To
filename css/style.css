@@ -296,14 +296,15 @@ color: white;
 .hero{
 background-image: url("../images/hero-mobile.webp");
 background-size:cover;
-background-position: center top;
+background-position: center;
 background-repeat:no-repeat;
+background-attachment:scroll;
 position:relative;
 display: flex;
 justify-content:center;
 align-items: center;
 width:100%;
-min-height: 100svh;
+min-height: 100dvh;
 overflow:hidden;
 padding: 90px 20px 40px;
 isolation:isolate;
