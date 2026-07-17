@@ -403,8 +403,8 @@ z-index:2;
 }
 .story-text{
 opacity:0;
-transform:translateY(20px);
-transition:opacity .5s,transform .5s;
+transform:translateY(15px);
+transition:.355s;
 font-size:clamp(1.3rem,3vw,1.8rem);
 line-height:2.1;
 letter-spacing:.5px;
@@ -436,12 +436,16 @@ opacity:0;
 display:none;
 }
 .story-dot{
+opacity:0;
+transform:translateY(15px);
+transition:.35s;
 animation:floatArrow 1.3s infinite;
 font-size:32px;
 color:#c8a062;
 }
 .story-dot.show{
 opacity:1;
+transform:translateY(0);
 }
 .story-title{
 font-size:clamp(2rem,5vw,3rem);
