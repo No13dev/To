@@ -94,7 +94,6 @@ App.elements.grids[category] = grid;
 });
 App.elements.productPrice = document.getElementById("product-price");
 App.elements.toastContainer = document.querySelector(".toast-container");
-App.elements.productPrice = document.getElementById("product-price");
 App.elements.productNicotine = document.getElementById("product-nicotine");
 App.elements.timeline = document.getElementById("timeline");
 App.elements.orderModal = document.getElementById("order-modal");
@@ -245,7 +244,7 @@ loading="lazy"
 >
 <div class="product-content">
 <h3 class="product-title">${product.name}</h3>
-<p class="product-pice">${product.price}</p>
+<p class="product-price">${product.price}</p>
 <div class="nicotine"> ${createNicotine(product.nicotine)}
 </div>
 <p class="product-status ${getStatusClass(product.status)}">
@@ -514,7 +513,7 @@ App.elements.searchResults.innerHTML = "";
 App.elements.searchInput.blur();
 }
 function filterProducts() { const search = App.state.search .toLowerCase() .trim();
-if (search.length <2) { App.elements.searchResults.innerHTML = "";
+if (search.length <1) { App.elements.searchResults.innerHTML = "";
 return;
 }
 const filteredProducts = App.products.filter((product) => { return product.name .toLowerCase() .includes(search);
@@ -561,17 +560,15 @@ function typeText(element, text, speed = 40){
 element.classList.remove("done");
 element.textContent = "";
 let index = 0;
-const timer = setInterval(()=>{
+typingTimer = setInterval(()=>{
 element.textContent += text[index];
 index++;
 if(index >= text.length){
-clearInterval(timer);
+clearInterval(typingTimer);
+typingTimer = null;
 element.classList.add("done");
-
 }
 }, speed);
-
-
 }
 function playStory(){
 storyTimers.forEach(clearTimeout);
@@ -588,13 +585,16 @@ dot2.className = "story-dot";
 dot2.textContent = ".";
 const second = document.createElement("p");
 second.className = "story-text";
-timeline.append(first,dot1,dot2,second);
+timeline.append(first);
+timeline.append(dot1);
+timeline.append(dot2);
+timeline.append(second);
 storyTimers.push(
 setTimeout(()=>{
 first.classList.add("show");
 typeText(
 first,
-storyItems[storyIndex][0], 55 );
+storyItems[storyIndex][0], 60 );
 },200));
 storyTimers.push(
 setTimeout(()=>{
@@ -607,7 +607,7 @@ dot2.classList.add("show");
 storyTimers.push(
 setTimeout(()=>{
 second.classList.add("show");
-typeText(second, storyItems[storyIndex][1],55); 
+typeText(second, storyItems[storyIndex][1],60); 
 },3000));
 storyTimers.push(
 setTimeout(()=>{
@@ -642,5 +642,8 @@ resetStory();
 },{
 threshold:0.5
 });
-observer.observe(document.querySelector(".story"));
+const storySection = document.querySelector(".story");
+if(storySection){
+observer.observe(storySection);
+}
 });

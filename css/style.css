@@ -9,7 +9,7 @@ scroll-behavior: smooth;
 body{
 background-image: url("../images/background-mobile.webp");
 background-size: cover;
-background-position: center;
+background-position: center center;
 background-attachment: fixed;
 background-repeat: no-repeat;
 color: #e5e5e5;
@@ -372,7 +372,7 @@ transform:translateY(-2px);
 
 .story{
 position:relative;
-min-height:92svh;
+min-height:100svh;
 padding:90px 25px;
 display:flex;
 flex-direction:column;
@@ -394,7 +394,7 @@ background-image:url("../images/story-desktop.webp");
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(180deg),rgba(0,0,0,.65),rgba(0,0,0,.45);
+background:linear-gradient(180deg,rgba(0,0,0,.65),rgba(0,0,0,.45));
 z-index:0;
 }
 .story>*{
@@ -437,8 +437,8 @@ display:none;
 }
 .story-dot{
 opacity:0;
-transform:translateY(15px);
-transition:.35s;
+transform:translateY(10px);
+transition:.4s;
 animation:floatArrow 1.3s infinite;
 font-size:32px;
 color:#c8a062;
