@@ -61,7 +61,7 @@ z-index: 100;
 }
 .search-overlay{
 position:fixed;
-top:86px;
+top:80px;
 left:0;
 right:0;
 bottom:0;
@@ -84,7 +84,7 @@ visibility:visible;
 pointer-events:auto;
 }
 .product-content{
-  gap:6.5px;
+  gap:6px;
 display:flex;
 flex-direction:column;
 padding:12px;
@@ -500,11 +500,13 @@ display:flex;
 }
 .product-title {
   color: #fff;
-  display:-webkit-box;
+  display:flex;
   -webkit-line-clamp: 1 ;
+  align-items: center;
+justify-content: center;
   -webkit-box-orient: vertical;
   overflow: hidden;
-min-height:30px ;
+height:52px ;
 text-align: center;
 line-height: 1.5;
 font-size: 19px;
@@ -548,8 +550,9 @@ display: flex;
 flex-direction: column;
 overflow:hidden;
 border-radius: 18px;
-background:rgba(255,255,255,04)
-min-height:290px;
+background:rgba(255,255,255,.04);
+min-height:285px;
+width:210px;
 backdrop-filter: blur(16px);
 transition:
 transform .3s ease,
@@ -561,9 +564,9 @@ background: rgba(255,255,255,.09);
 }
 .product-image{
 width:100%;
-aspect-ratio:1/1;
+aspect-ratio:1/0.82;
 object-fit:cover;
-padding:14px;
+padding:10px;
 }
 .product-status{
 font-size:.95rem;
@@ -604,7 +607,7 @@ transform:translateY(-50%) scale(1.08);
 .status-unavailable,
 .status-unknown{
 display: inline-block;
-margin-bottom:20px;
+margin-bottom:12px;
 padding: 8px 16px;
 border-radius: 999px;
 }
@@ -804,7 +807,7 @@ font-weight:700;
 }
 .add-cart-btn{
 margin-top:auto;
-width: 25px;px;
+width: 25px;
 height:25px;
 align-self:flex-end;
 border:none;
@@ -893,7 +896,7 @@ transform:translateY(-2px);
 display:flex;
 align-items:center;
 gap:6px;
-margin-top:10px;
+margin-top:2px;
 flex-wrap:wrap;
 }
 .nicotine-text{
@@ -952,7 +955,7 @@ transform:translatex(0);
 opacity:1;
 }
 .product-price{
-margin:8px 0 14px;
+margin:4px 0 8px;
 font-size:1rem;
 font-weight:700;
 color:#d4b74d;
