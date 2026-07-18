@@ -565,7 +565,6 @@ element.textContent += text[index];
 index++;
 if(index >= text.length){
 clearInterval(typingTimer);
-typingTimer = null;
 element.classList.add("done");
 }
 }, speed);

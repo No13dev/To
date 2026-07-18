@@ -439,7 +439,6 @@ display:none;
 opacity:0;
 transform:translateY(10px);
 transition:.4s;
-animation:floatArrow 1.3s infinite;
 font-size:32px;
 color:#c8a062;
 }
