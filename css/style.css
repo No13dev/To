@@ -964,11 +964,11 @@ box-shadow:0 0 6px rgba(209,123,50,.4);
 }
 .toast-container{
 position:fixed;
-top:100px;
-right:20px;
+bottom:90px;
+left:20px;
 display:flex;
 flex-direction:column;
-gap:12px;
+gap:10px;
 z-index:9999;
 pointer-events:none;
 }
