@@ -549,6 +549,7 @@ border-radius:12px;
 margin-bottom:25px;
 }
 .product-card{
+  flex:0 0 210px;
 display: flex;
 box-shadow: 0 10px 30px rgba(0,0,0,.28);
 flex-direction: column;
@@ -556,6 +557,8 @@ overflow:hidden;
 border-radius: 18px;
 background:rgba(255,255,255,.04);
 min-height:unset;
+min-width:210px;
+max-width:210px;
 width:195px;
 backdrop-filter: blur(16px);
 transition:
@@ -982,13 +985,13 @@ backdrop-filter:blur(18px);
 border:1px solid rgba(255,255,255,.08);
 color:#fff;
 font-size:.95rem;
-transform:translateX(120%);
+transform:scale(.9);
 opacity:0;
 transition:.35s;
 box-shadow: 0 10px 30px rgba(0,0,0,.4)
 }
 .toast.show{
-transform:translatex(0);
+transform:scale(1);
 opacity:1;
 }
 .product-price{

@@ -405,7 +405,7 @@ quantity: 1
 } 
 updateCartCount();
 saveCart();
-showToast(`${product.name} ✔به سبد اضافه شد` );
+showToast(`${product.name} به سبد اضافه شد✔` );
 }
 function updateCartCount() {
 const total = App.cart.reduce(
