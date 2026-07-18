@@ -87,7 +87,7 @@ pointer-events:auto;
   gap:6px;
 display:flex;
 flex-direction:column;
-padding:12px;
+padding:14px;
 flex:1;
 } 
 .search-results{
@@ -499,17 +499,20 @@ z-index:800;
 display:flex;
 }
 .product-title {
+  height:52px ;
+    display:flex;
+     align-items: center;
+     justify-content: center;
+     text-align: center;
+       overflow: hidden;
+       white-space: nowrap;
+       text-overflow:ellipsis;
+font-size: 15px;
+font-weight:700;
   color: #fff;
-  display:flex;
   -webkit-line-clamp: 1 ;
-  align-items: center;
-justify-content: center;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-height:52px ;
-text-align: center;
 line-height: 1.5;
-font-size: 19px;
+letter-spacing: .2px;
 }
 .close-product{
 position:absolute;
@@ -547,12 +550,13 @@ margin-bottom:25px;
 }
 .product-card{
 display: flex;
+box-shadow: 0 10px 30px rgba(0,0,0,.28);
 flex-direction: column;
 overflow:hidden;
 border-radius: 18px;
 background:rgba(255,255,255,.04);
-min-height:285px;
-width:210px;
+min-height:unset;
+width:195px;
 backdrop-filter: blur(16px);
 transition:
 transform .3s ease,
@@ -560,16 +564,21 @@ background .3s ease;
 }
 .product-card:hover{
 transform: translateY(-6px);
-background: rgba(255,255,255,.09);
+box-shadow:0 14px 35px rgba(0,0,0,.35);
 }
 .product-image{
+  transform:scale(1.05);
 width:100%;
+transition:.35s;
 aspect-ratio:1/0.82;
 object-fit:cover;
 padding:10px;
 }
+
 .product-status{
-font-size:.95rem;
+  align-self: flex-start;
+  font-size: .82rem;
+  padding: 6px 14px;
 }
 .scroll-left,
 .scroll-right{
@@ -807,12 +816,23 @@ font-weight:700;
 }
 .add-cart-btn{
 margin-top:auto;
-width: 25px;
-height:25px;
+display:flex;
+width: 34px;
+height:34px;
 align-self:flex-end;
+background:#c8a062;
+color:#111;
+font-size:22px;
+transition:.3s;
+align-items: center;
+justify-content: center;
 border:none;
 border-radius:50%;
 cursor:pointer;
+}
+.add-cart-btn:hover{
+  transform:scale(1.08);
+  background:#d8b472;
 }
 .cart-modal{
 display: none;
@@ -896,7 +916,8 @@ transform:translateY(-2px);
 display:flex;
 align-items:center;
 gap:6px;
-margin-top:2px;
+margin-bottom: 4px;
+margin-top:0px;
 flex-wrap:wrap;
 }
 .nicotine-text{
@@ -956,7 +977,8 @@ opacity:1;
 }
 .product-price{
 margin:4px 0 8px;
-font-size:1rem;
+font-size:1.05rem;
+letter-spacing: .3px;
 font-weight:700;
 color:#d4b74d;
 }
