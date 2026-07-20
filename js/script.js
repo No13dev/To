@@ -453,19 +453,24 @@ updateCartCount();
 saveCart();
 }
 function decreaseCartItem(id) {
+    const product = App.products.find((item)=> item.id === id );
+    if(!product) return;
 const item = App.cart.find((item) => item.id === id);
 if (!item) return;
 item.quantity--;
 if (item.quantity <= 0) {
-App.cart = App.cart.filter((item) => item.id !== id);
-}
+App.cart = App.cart.filter(item => item.id !== id);
+showToast(`${product.name}از سبد حذف شذ`);
+}else{ showToast(`تعداد${product.name}کم شد-`);}
 updateCartCount();
 saveCart();
 }
 function clearCart() {
+    if (App.cart.length === 0) return;
 App.cart = [];
 updateCartCount();
 saveCart();
+showToast("سبد خرید پاک شد");
 }
 App.elements.cartItems.addEventListener("click", (event) => {
 const row = event.target.closest(".cart-row");
@@ -645,4 +650,7 @@ const storySection = document.querySelector(".story");
 if(storySection){
 observer.observe(storySection);
 }
+const savedScroll = sessionStorage.getItem("scrollY");
+if (savedScroll) { window.scrollTo({ top: Number(savedScroll), behavior: "instant"});}
+window.addEventListener("scroll",()=>{ sessionStorage.setItem( "scrollY", window.scrollY);});
 });
