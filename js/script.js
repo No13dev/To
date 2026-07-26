@@ -268,7 +268,7 @@ ${getStatusText(product.status)}
 </p>
 <button class="add-cart-btn"
 type="button"
-aria-label="افزودن به سبد خرید">
+aria-label="افزودن به سبد خرید" ${product.status !== "available" ? "disabled" : ""}>
 <svg xmlns="http://www.w3.org/2000/svg"
 width="18"
 height="18"
@@ -444,7 +444,11 @@ if (App.cart.length === 0) {
 App.elements.cartTotal.textContent = "تومان.";
 App.elements.clearCartBtn.style.display = "none";
 App.elements.cartItems.innerHTML = `
-<p class="empty-cart"> محصولی وجود ندارد </p> `;
+<div class="empty-cart">
+<div class="empty-cart-icon">🛒</div>
+<h3>سبد خرید خالی است</h3>
+<p>هنوز محصولی انتخاب نکردید </p>
+</div> `;
 return;
  }
  App.elements.clearCartBtn.style.display = "block";
