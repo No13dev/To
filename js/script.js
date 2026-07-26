@@ -92,6 +92,10 @@ document.querySelectorAll(".product-grid").forEach((grid) => {
 const category = grid.dataset.category;
 App.elements.grids[category] = grid;
 });
+App.elements.cartContactModal = document.querySelector(".cart-contact-modal");
+App.elements.cartContactBtn = document.querySelector(".cart-contact-btn");
+App.elements.closeCartContact = document.querySelector(".close-cart-contact");
+App.elements.copyOrderBtn = document.querySelector(".copy-order-btn");
 App.elements.cartTotal = document.getElementById("cart-total");
 App.elements.productPrice = document.getElementById("product-price");
 App.elements.toastContainer = document.querySelector(".toast-container");
@@ -222,6 +226,17 @@ closeOrder();
 }
 }
 );
+function openCartContact(){ 
+App.elements.cartContactModal.classList.add("show");
+App.state.activeModal = "cart-contact";
+}
+function closeCartContact(){
+App.elements.cartContactModal.classList.remove("show");
+App.state.activeModal = null;
+}
+App.elements.cartContactBtn.addEventListener("click", openCartContact);
+App.elements.closeCartContact.addEventListener("click", closeCartContact);
+App.elements.cartContactModal.addEventListener("click", (event)=>{ if (event.target===App.elements.cartContactModal){closeCartContact();} });
 function toggleProductsMenu() {
 App.elements.productsMenu.classList.toggle("show");
 }
@@ -254,6 +269,18 @@ ${getStatusText(product.status)}
 <button class="add-cart-btn"
 type="button"
 aria-label="افزودن به سبد خرید">
+<svg xmlns="http://www.w3.org/2000/svg"
+width="18"
+height="18"
+fill="none"
+viewBox=" 0 0 24 24"
+stroke="currentColor">
+<path
+stroke-linecap="round"
+stroke-linejoin="round"
+stroke-width="2"
+d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 12l-1 5h13M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/>
+</svg>
 +
 </button>
 </div>
@@ -268,7 +295,6 @@ App.elements.productImage.alt = product.name;
 App.elements.productTitle.textContent = product.name;
 App.elements.productPrice.textContent = product.price;
 App.elements.productDescription.textContent = product.description;
-App.elements.productPrice.textContent = product.price;
 App.elements.productNicotine.innerHTML = createNicotine(product.nicotine);
 App.elements.productStatus.className = `product-status ${getStatusClass(product.status)}`;
 App.elements.productModal.classList.add("show");
@@ -283,7 +309,6 @@ if (!product) return;
 addToCart(product);
 });
 function openCart() {
-renderCart();
 App.elements.cartModal.classList.add("show");
 App.state.activeModal = "cart";
 }
@@ -443,6 +468,16 @@ App.elements.cartItems.appendChild(cartRow);
  });
  App.elements.cartTotal.textContent = total.toLocaleString("fa-IR") + " تومان ";
  }
+ function buildOrderText(){
+ let text = ".سلام وقت بخیر \n\n" + "درخواست محصولات زیر را دارم: \n\n";
+ App.cart.forEach((cartItem)=>{
+ const product = App.products.find(
+ item => item.id === cartItem.id);
+ if(!product) return;
+ text += `• ${product.name} × ${cartItem.quantity}\n`;
+ });
+ return text;
+ }
 function createCartItem(cartItem) {
 const product = App.products.find( (item) => item.id === cartItem.id );
 if (!product) return null;
@@ -455,9 +490,9 @@ row.innerHTML = `
 <p class="cart-price"> ${product.price}</p>
 </div>
 <div class="cart-controls">
-<button class="decrease-btn">-</button>
-<span>${cartItem.quantity}</span>
-<button class="increase-btn">+</button>
+<button class="decrease-btn" type="button">-</button>
+<span class="cart-quantity"> ${cartItem.quantity}</span>
+<button class="increase-btn" type="button">+</button>
 </div>
 `;
 return row;
@@ -670,4 +705,18 @@ observer.observe(storySection);
 const savedScroll = sessionStorage.getItem("scrollY");
 if (savedScroll) { window.scrollTo({ top: Number(savedScroll), behavior: "instant"});}
 window.addEventListener("scroll",()=>{ sessionStorage.setItem( "scrollY", window.scrollY);});
+
+App.elements.copyOrderBtn.addEventListener("click", async()=>{
+if(App.cart.length===0){
+showToast("سبد خرید خالی است");
+return;
+}
+try{
+await navigator.clipboard.writeText(buildOrderText());
+showToast("سفارش کپی شد✔ ");
+}catch{
+showToast("خطا در کپی");
+}
 });
+});
+
