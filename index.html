@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,23 +20,24 @@
 <meta property="og:image" content="images/cover.webp">
 <meta property="og:type" content="website">
 <link rel="icon" href="images/favicon.png">
-
 </head>
+
 <body>
+
 <header class="header">
 <div class="logo"> TO </div>
 <div class="search-box">
 <span class="search-icon">🔍</span>
 <input type="text" placeholder="...جستجوی محصول">
 </div>
-<button class="menu-btn" id="menu-btn">
-☰
-</button>
+<button class="menu-btn" id="menu-btn">☰</button>
 </header>
+
 <div class="search-overlay" id="search-overlay">
 <div class="search-results" id="search-results">
 </div>
 </div>
+
 <section id="hero" class="hero">
 <div class="hero-content">
 <h1 class="hero-title"> هر انتخاب روایت توست </h1> 
@@ -43,16 +45,16 @@
 <a href="#products" class="hero-btn"> مشاهده محصولات </a>
 </div>
 </section>
+
 <section id="about" class="story">
 <h2 class="story-title"> داستان تـو</h2>
 <div class="timeline" id="timeline">
 </div>
 </section>
+
 <div class="menu-overlay" id="menu-overlay">
 <div class="side-menu" id="side-menu">
-<button class="close-menu" id="close-menu" type="button">
-✖
-</button>
+<button class="close-menu" id="close-menu" type="button">✖</button>
 <nav class="side-nav">
 <a href="#hero"> خانه </a>
 <button class="products-toggle" id="products-toggle" type="button"> محصولات⬇ </button>
@@ -69,6 +71,7 @@
 </nav>
 </div>
 </div>
+
 <section class="products" id="products">
 <section id="tobacco" class="product-section"> 
 <h2 class="section-title"> توتون </h2>
@@ -113,6 +116,7 @@
 <img id="product-image" src="" alt="">
 <h2 id="product-title" class="product-title"></h2>
 <p id="product-price" class="modal-price"></p>
+<p id="product-unit" class="modal-unit"></p>
 <p id="product-description"></p>
 <div id="product-nicotine"></div>
 <span id="product-status"></span>
@@ -120,15 +124,15 @@
 </button>
 </div>
 </div>
+
 <footer id="contact" class="footer">
 <button id="order-btn" class="order-btn">راه های ارتباط</button>
 <a class="footer-address" href="https://www.google.com/maps/place/%DA%A9%D8%A7%D9%81%D9%87+%D8%AA%D9%88%E2%80%AD/@35.8104988,51.0071266,16.62z/data=!4m6!3m5!1s0x3f8dbf003f02346b:0xf81a680308a422d5!8m2!3d35.8112039!4d51.008881!16s%2Fg%2F11zkkfj1d1?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">آدرس📍</a>
 </footer>
+
 <div class="order-modal" id="order-modal">
 <div class="order-content">
-<span class="close-order">
-✖
-</span>
+<span class="close-order">✖</span>
 <h2>ارتباط با ما</h2>
 <a class="contact-btn phone" href="tel:+989014909612">تماس📞
 </a>
@@ -139,17 +143,13 @@ Telegram </a>
 </div>
 </div>
 
-<div class="cart-floating">
-🛒 
-<span class="cart-count">
-0 
-</span>
+<div class="cart-floating">🛒
+<span class="cart-count">0</span>
 </div>
+
 <div class="cart-modal" id="cart-modal">
 <div class="cart-content">
-<span class="close-cart"> 
-✖ 
-</span>
+<span class="close-cart"> ✖ </span>
 <h2> سبد خرید </h2>
 <div class="cart-items"> 
 </div>
@@ -158,27 +158,28 @@ Telegram </a>
 </div>
 <button class="copy-order-btn"> 📄کپی سفارش </button>
 <button class="cart-contact-btn"> ثبت سفارش </button>
-<button class="clear-cart-btn"> 🗑
-</button>
-</div>
-</div>
-<div class="admin-panel hidden" id="admin-panel">
-</div>
+<button class="clear-cart-btn">🗑</button>
 <div class="cart-contact-modal">
 <div class="order-content">
-<span class="close-cart-contact">
-✖</span>
+<span class="close-cart-contact">✖</span>
 <h2>ثبت سفارش</h2>
 <a class="contact-btn phone" href="tel:+989014909612">تماس📞
 </a>
-<a class="contact-btn telegram" href="https://t.me/Roonin" target="_blank" rel="noopener noreferrer">
-Telegram </a>
+<a class="contact-btn telegram" href="https://t.me/Roonin" target="_blank" rel="noopener noreferrer">Telegram </a>
 <h3 class="address-title"> آدرس فروشگاه📍</h3>
 <a class="address-link" href="https://www.google.com/maps/place/%DA%A9%D8%A7%D9%81%D9%87+%D8%AA%D9%88%E2%80%AD/@35.8104988,51.0071266,16.62z/data=!4m6!3m5!1s0x3f8dbf003f02346b:0xf81a680308a422d5!8m2!3d35.8112039!4d51.008881!16s%2Fg%2F11zkkfj1d1?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer"> میدان کرج نبش بلوار چمران و مدرس نبش سینما هجرت قهوه تـــو</a>
 </div>
 </div>
+</div>
+</div>
+
 <div class="toast-container">
 </div>
+
+<div class="admin-panel hidden" id="admin-panel">
+</div>
+
 <script src="js/script.js"></script>
+
 </body>
 </html>

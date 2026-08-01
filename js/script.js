@@ -1,97 +1,49 @@
-document.addEventListener(
-"DOMContentLoaded",
-() => {
-const App = {
-products:[ {
-id: "virginia-gold",
-category: "tobacco",
-name: "توتون ویرجینیا طلایی",
-image: "images/virginiagold.webp",
-description: "ویرجینیا طلایی با عطر و طعم مزرعه و اصالت",
-price: "300,000 تومان",
-nicotine: 1 ,
-status: "available",
-order: 1
-} , 
-{
-id: "marlboro-gold",
-category: "tobacco",
-name: "توتون ماربورو طلایی",
-image: "images/marlborogold.webp",
-description: "توتون ماربورو طلایی اصیل ",
-price: "300,000 تومان",
-nicotine:2 ,
-status: "available",
-order: 2
-} ,
-{
-id: "winston",
-category: "tobacco",
-name: "توتون وینستون",
-image: "images/winston.webp",
-description: "توتون وینستون توتون قدیمی و اصیل",
-price: "300,000 تومان",
-nicotine: 3 ,
-status: "available",
-order: 3
-} ,
-{
-id: "ese",
-category: "tobacco",
-name: "توتون اسی",
-image: "images/ese.webp",
+document.addEventListener( "DOMContentLoaded", () => { 
+const App={ products:[{
+id:"virginia-gold",category:"tobacco",name:"توتون ویرجینیا طلایی",image:"images/virginiagold.webp",
+description:"ویرجینیا طلایی با عطر و طعم مزرعه و اصالت",
+price:"380,000 تومان",unit:"100g",nicotine:1,status:"available",order:1 },
+{ id:"marlboro-gold",category:"tobacco",name:"توتون ماربورو طلایی",image:"images/marlborogold.webp",
+description:"توتون ماربورو طلایی اصیل",
+price:"400,000 تومان",unit:"100g",nicotine:2,status:"available",order:2 },
+{ id:"winston",category:"tobacco",name:"توتون وینستون",image:"images/winston.webp",description:"توتون وینستون توتون قدیمی و اصیل",
+price:"400,000 تومان",unit:"100g",nicotine:3,status:"available",order:3 },
+{ id:"ese",category:"tobacco",name:"توتون اسی",image: "images/ese.webp",
 description: "توتون اسی توتون متعادل با بافت تیره",
-price: "300,000 تومان",
-nicotine: 4,
-status: "unavailable",
-order: 4
-} ,
-{
-id: "jungle",
-category: "tobacco",
-name: "توتون جنگلی",
-image: "images/jangali.webp",
+price:"300,000 تومان",unit:"100g",nicotine:4,status:"unavailable",order:4 },
+{ id:"jungle",category:"tobacco",name:"توتون جنگلی",image:"images/jangali.webp",
 description: "توتون جنگلی سیگار اختصاصی تو",
-price: "300,000 تومان",
-nicotine: 5,
-status: "available",
-order: 5
-} ,
-{
-id: "koba",
-category: "tobacco",
-name: "توتون کوبا",
-image: "images/koba.webp",
-description: "توتون کوبا توتون اصیل کوبایی با رایحه و طعم خاص",
-price: "300,000 تومان",
-nicotine: 6,
-status: "available",
-order: 6
-} ,
-{
-id: "marlborored",
-category: "tobacco",
-name: "توتون ماربورو قرمز",
-image: "images/marlborored.webp",
+price:"350,000 تومان",unit:"100g",nicotine:4,status:"available",order:5 },
+{ id:"virginia-gray",category:"tobacco",
+name:"توتون ویرجینیا خاکستری",image:"images/marlborored.webp",
+description:"توتون ماربورو رد توتون اصیل و خالص با طعمی تلخ برای سسلیقه خاص",
+price:"350,000 تومان",unit:"100g",nicotine:5,status:"available",order:6 },
+{ id:"koba",category:"tobacco",name:"توتون کوبا",image:"images/koba.webp",
+description:"توتون کوبا توتون اصیل کوبایی با رایحه و طعم خاص",
+price:"550,000 تومان",unit:"100g",nicotine:6,status:"available",order:7 },
+{ id:"marlborored",category:"tobacco",name:"توتون ماربورو قرمز",image:"images/marlborored.webp",
+description:"توتون ماربورو رد توتون اصیل و خالص با طعمی تلخ برای سسلیقه خاص",
+price:"350,000 تومان",unit:"100g",nicotine:12,status:"available",order:8 },
+{ id:"chapman",category:"tobacco",name:"توتون چاپ من",image:"images/chapman.webp",
+description:"توتون آلمانی چاپ من",
+price:"600,000 تومان",unit:"100g",nicotine:4,status:"available",order:9 },
+{ id:"classic",category: "tobacco",name: "توتون کلاسیک",image:"images/classic.webp",
 description: "توتون ماربورو رد توتون اصیل و خالص با طعمی تلخ برای سسلیقه خاص",
-price: "300,000 تومان",
-nicotine: 12,
-status: "available",
-order: 7
-}],
-cart: [],
-elements: {},
-state: {
-search: "",
-activeModal: null,
-selectedProduct:null
-}
-};
+price:"400,000 تومان",unit:"100g",nicotine:3,status:"available",order:10 },
+{ id:"T&T",category:"filter",name:"فیلتر T&T",image:"images/T&T.webp",
+description:"پوکه فیلتر قرمز کم گوگرد",
+price:"580,000 تومان",unit:"200عدد",status:"available",order:11 },
+{ id:"T&T",category:"filter",name:"فیلتر T&T",image:"images/T&T.webp",
+description:"پوکه فیلتر قرمز کم گوگرد",
+price:"580,000 تومان",unit:"200عدد",status:"available",order:11 }
+],
+cart:[],elements:{},state:{ search:"",activeModal:null,selectedProduct:null }};
 App.elements.grids = {};
 document.querySelectorAll(".product-grid").forEach((grid) => {
 const category = grid.dataset.category;
 App.elements.grids[category] = grid;
 });
+App.elements.productUnit = document.getElementById("product-unit");
 App.elements.cartContactModal = document.querySelector(".cart-contact-modal");
 App.elements.cartContactBtn = document.querySelector(".cart-contact-btn");
 App.elements.closeCartContact = document.querySelector(".close-cart-contact");
@@ -261,6 +213,7 @@ loading="lazy"
 <div class="product-content">
 <h3 class="product-title">${product.name}</h3>
 <p class="product-price">${product.price}</p>
+<p class="product-unit">${product.unit}</p>
 <div class="nicotine"> ${createNicotine(product.nicotine)}
 </div>
 <p class="product-status ${getStatusClass(product.status)}">
@@ -294,6 +247,7 @@ App.elements.productImage.src = product.image;
 App.elements.productImage.alt = product.name;
 App.elements.productTitle.textContent = product.name;
 App.elements.productPrice.textContent = product.price;
+App.elements.productUnit.textContent = product.unit;
 App.elements.productDescription.textContent = product.description;
 App.elements.productNicotine.innerHTML = createNicotine(product.nicotine);
 App.elements.productStatus.className = `product-status ${getStatusClass(product.status)}`;
@@ -302,6 +256,7 @@ App.state.activeModal = "product";
 App.elements.productStatus.textContent =
 getStatusText(product.status);
 App.state.selectedProduct = product;
+App.elements.addProductBtn.disabled = product.status !== "available";
 }
 App.elements.addProductBtn.addEventListener("click", () => {
 const product = App.state.selectedProduct;
@@ -654,21 +609,21 @@ setTimeout(()=>{
 first.classList.add("show");
 typeText(
 first,
-storyItems[storyIndex][0], 60 );
+storyItems[storyIndex][0], 70 );
 },200));
 storyTimers.push(
 setTimeout(()=>{
 dot1.classList.add("show");
-},1800));
+},800));
 storyTimers.push(
 setTimeout(()=>{
 dot2.classList.add("show");
-},2400));
+},1100));
 storyTimers.push(
 setTimeout(()=>{
 second.classList.add("show");
 typeText(second, storyItems[storyIndex][1],60); 
-},3000));
+},1600));
 storyTimers.push(
 setTimeout(()=>{
 timeline.innerHTML="";
@@ -677,7 +632,7 @@ if(storyIndex>=storyItems.length){
 storyIndex=0;
 }
 playStory();
-},6500));
+},3500));
 }
 function resetStory(){
 storyTimers.forEach(clearTimeout);
