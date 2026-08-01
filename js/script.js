@@ -460,6 +460,10 @@ function increaseCartItem(id) {
 const item = App.cart.find((item) => item.id === id);
 if (!item) return;
 item.quantity++;
+if (item.quantity <= 0) {
+App.cart = App.cart.filter(item => item.id !== id);
+showToast(`${product.name} به سبد اضافه شد`);
+}else{ showToast(` به تعداد ${product.name} اضافه شد -`);}
 updateCartCount();
 saveCart();
 }
