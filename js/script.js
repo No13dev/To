@@ -81,128 +81,89 @@ App.elements.searchInput.addEventListener("input",(event)=>{App.state.search = e
 filterProducts();
 });
 App.elements.searchOverlay.addEventListener("click", (event) => {if (event.target === App.elements.searchOverlay) { closeSearch(); } });
-const storyItems = [ [ "سال ها پیش",
-"شروع ایده"
-],
-[ 
-"بعد از چند سال",
-"اولین فروش و افتتاح فروشگاه"
-],
-[ 
-"امروز",
-"خانواده تو" ]];
-
-function renderProducts(products=App.products){products=[...products].sort((a,b)=>a.order - b.order);
-Object.values(App.elements.grids).forEach((grid) => {
-grid.innerHTML = "";
-});
-products.forEach((product) => {
-const grid = App.elements.grids[product.category];
-if (!grid) return;
-const card = createProductCard(product);
-grid.appendChild(card);
-});
+function renderProducts(products=App.products)
+{products=[...products].sort((a,b)=>a.order - b.order);
+Object.values(App.elements.grids).forEach((grid)=>{grid.innerHTML="";});
+products.forEach((product)=>{
+const grid=App.elements.grids[product.category];
+if(!grid)return;
+const card=createProductCard(product); 
+grid.appendChild(card);});
 document.querySelectorAll(".product-section").forEach((section)=>{
-const grid = section.querySelector(".product-grid");
-if(!grid || grid.children.length === 0){
-section.style.display="none";
+const grid=section.querySelector(".product-grid");
+if(!grid||grid.children.length===0){section.style.display="none";
 }else{
-section.style.display="";
-}
-});
-}
-function initScrollButtons() {
-document.querySelectorAll(".product-section").forEach((section) => {
-const grid = section.querySelector(".product-grid");
-const left = section.querySelector(".scroll-left");
-const right = section.querySelector(".scroll-right");
-if (!grid || !left || !right) return;
-left.addEventListener("click", () => {
-grid.scrollBy({ left: -320, behavior: "smooth"
-});
-});
-right.addEventListener("click", () => {
-grid.scrollBy({ left: 320, behavior: "smooth"
-});
-});
-function updateButtons() {
-const hasScroll = grid.scrollWidth > grid.clientWidth;
-if (hasScroll) {
+section.style.display="";}});}
+function initScrollButtons()
+{document.querySelectorAll(".product-section").forEach((section)=>{
+const grid=section.querySelector(".product-grid");
+const left=section.querySelector(".scroll-left");
+const right=section.querySelector(".scroll-right");
+if(!grid||!left||!right)return;
+left.addEventListener("click",()=>{grid.scrollBy({left:-320,behavior:"smooth"});});
+right.addEventListener("click",()=>{grid.scrollBy({left:320,behavior:"smooth"});});
+function updateButtons(){
+const hasScroll=grid.scrollWidth>grid.clientWidth;
+if(hasScroll){
 left.style.display = "block";
-right.style.display = "block";
+right.style.display = "block"; 
 }else{ 
-left.style.display = "none";
-right.style.display = "none";
-}
-}
+left.style.display="none";
+right.style.display="none";}}
 updateButtons();
-grid.addEventListener("scroll", updateButtons);
-window.addEventListener("resize",updateButtons);
-});
-}
-function closeMenu() {
-closeSearch();
+grid.addEventListener("scroll",updateButtons);
+window.addEventListener("resize",updateButtons);});}
+function closeMenu(){closeSearch();
 App.elements.productsMenu.classList.remove("show");
 App.elements.sideMenu.classList.remove("show");
-document.body.style.overflow = "auto";
-App.elements.menuOverlay.classList.remove("show");
-}
+document.body.style.overflow="auto";
+App.elements.menuOverlay.classList.remove("show");}
 function openMenu(){
-if (App.elements.sideMenu.classList.contains("show")) { return; }
+if(App.elements.sideMenu.classList.contains("show"))
+{return;}
 App.elements.sideMenu.classList.add("show");
 App.elements.menuOverlay.classList.add("show");
-document.body.style.overflow = "hidden";
-}
-function openOrder() {
+document.body.style.overflow="hidden";}
+function openOrder(){
 App.elements.orderModal.classList.add("show");
-App.state.activeModal = "order";
-
-}
-App.elements.orderBtn.addEventListener( "click", openOrder);
-function closeOrder() {
+App.state.activeModal="order";}
+App.elements.orderBtn.addEventListener("click",openOrder);
+function closeOrder(){
 App.elements.orderModal.classList.remove("show");
-App.state.activeModal = null;
-
-}
-App.elements.closeOrder.addEventListener("click", closeOrder);
-App.elements.orderModal.addEventListener("click", (event) => {
-if (event.target === App.elements.orderModal) {
-closeOrder();
-}
-}
-);
+App.state.activeModal=null;}
+App.elements.closeOrder.addEventListener("click",closeOrder);
+App.elements.orderModal.addEventListener("click",(event)=>{
+if(event.target===App.elements.orderModal){
+closeOrder();}});
 function openCartContact(){ 
 App.elements.cartContactModal.classList.add("show");
-App.state.activeModal = "cart-contact";
-}
+App.state.activeModal="cart-contact";}
 function closeCartContact(){
 App.elements.cartContactModal.classList.remove("show");
-App.state.activeModal = null;
-}
-App.elements.cartContactBtn.addEventListener("click", openCartContact);
-App.elements.closeCartContact.addEventListener("click", closeCartContact);
-App.elements.cartContactModal.addEventListener("click", (event)=>{ if (event.target===App.elements.cartContactModal){closeCartContact();} });
-function toggleProductsMenu() {
-App.elements.productsMenu.classList.toggle("show");
-}
-document.querySelectorAll(".side-nav a").forEach((link) => {
-link.addEventListener("click", closeMenu);
-});
-App.elements.menuBtn.addEventListener( "click", openMenu );
-App.elements.closeMenu.addEventListener( "click", closeMenu );
-App.elements.productsToggle.addEventListener( "click", toggleProductsMenu );
-App.elements.menuOverlay.addEventListener( "click", (event) => {
-if (event.target === App.elements.menuOverlay) { closeMenu(); } });
-function createProductCard(product) {
-const card = document.createElement("article");
-card.className = "product-card";
-card.innerHTML = `
+App.state.activeModal=null;}
+App.elements.cartContactBtn.addEventListener("click",openCartContact);
+App.elements.closeCartContact.addEventListener("click",closeCartContact);
+App.elements.cartContactModal.addEventListener("click",(event)=>
+{if(event.target===App.elements.cartContactModal)
+{closeCartContact();}});
+function toggleProductsMenu(){
+App.elements.productsMenu.classList.toggle("show");}
+document.querySelectorAll(".side-nav a").forEach((link)=>{
+link.addEventListener("click",closeMenu);});
+App.elements.menuBtn.addEventListener("click",openMenu);
+App.elements.closeMenu.addEventListener("click",closeMenu);
+App.elements.productsToggle.addEventListener("click",toggleProductsMenu );
+App.elements.menuOverlay.addEventListener("click",(event)=>{
+if (event.target === App.elements.menuOverlay){closeMenu();}});
+function createProductCard(product){
+const card=document.createElement("article");
+card.className="product-card";
+card.innerHTML= `
 <img
 class="product-image"
 src="${product.image}"
 alt="${product.name}"
-loading="lazy"
->
+loading="lazy">
 <div class="product-content">
 <h3 class="product-title">${product.name}</h3>
 <p class="product-price">${product.price}</p>
@@ -565,99 +526,6 @@ if (!product) return;
 closeSearch();
 openModal(product);
 });
-let typingTimer = null;
-let storyPlaying = false;
-let storyIndex = 0;
-let storyTimers = [];
-function typeText(element, text, speed = 40){
-element.classList.remove("done");
-element.textContent = "";
-let index = 0;
-typingTimer = setInterval(()=>{
-element.textContent += text[index];
-index++;
-if(index >= text.length){
-clearInterval(typingTimer);
-element.classList.add("done");
-}
-}, speed);
-}
-function playStory(){
-storyTimers.forEach(clearTimeout);
-storyTimers = [];
-const timeline = App.elements.timeline;
-timeline.innerHTML = "";
-const first = document.createElement("p");
-first.className = "story-text";
-const dot1 = document.createElement("div");
-dot1.className = "story-dot";
-dot1.textContent = ".";
-const dot2 = document.createElement("div");
-dot2.className = "story-dot";
-dot2.textContent = ".";
-const second = document.createElement("p");
-second.className = "story-text";
-timeline.append(first);
-timeline.append(dot1);
-timeline.append(dot2);
-timeline.append(second);
-storyTimers.push(
-setTimeout(()=>{
-first.classList.add("show");
-typeText(
-first,
-storyItems[storyIndex][0], 70 );
-},200));
-storyTimers.push(
-setTimeout(()=>{
-dot1.classList.add("show");
-},800));
-storyTimers.push(
-setTimeout(()=>{
-dot2.classList.add("show");
-},1100));
-storyTimers.push(
-setTimeout(()=>{
-second.classList.add("show");
-typeText(second, storyItems[storyIndex][1],60); 
-},1600));
-storyTimers.push(
-setTimeout(()=>{
-timeline.innerHTML="";
-storyIndex++;
-if(storyIndex>=storyItems.length){
-storyIndex=0;
-}
-playStory();
-},3500));
-}
-function resetStory(){
-storyTimers.forEach(clearTimeout);
-storyTimers = [];
-clearInterval(typingTimer);
-storyIndex = 0;
-App.elements.timeline.innerHTML = "";
-}
-const observer = new IntersectionObserver((entries)=>{
-entries.forEach((entry)=>{
-if(entry.isIntersecting){
-if(!storyPlaying){
-storyPlaying=true
-resetStory();
-playStory();
-}
-}else{
-storyPlaying=false;
-resetStory();
-}
-});
-},{
-threshold:0.5
-});
-const storySection = document.querySelector(".story");
-if(storySection){
-observer.observe(storySection);
-}
 const savedScroll = sessionStorage.getItem("scrollY");
 if (savedScroll) { window.scrollTo({ top: Number(savedScroll), behavior: "instant"});}
 window.addEventListener("scroll",()=>{ sessionStorage.setItem( "scrollY", window.scrollY);});
