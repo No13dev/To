@@ -1,7 +1,7 @@
 *{ margin:0; padding:0; box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 
-body{ background-image:url("../images/background-mobile.webp"); background-size:cover; background-position:center top; background-attachment:fixed; background-repeat:no-repeat; background-color:white; font-family:'Vazirmatn',sans-serif; min-height:100vh; overflow-x:hidden; } @media(min-width:768px){ body{ background-image:url("../images/background-desktop.webp"); } }
+body{ background-image:url("../images/background-mobile.webp"); background-size:cover; background-position:center top; background-attachment:fixed; background-repeat:no-repeat; background-color:white; font-family:'Vazirmatn',sans-serif; min-height:100vh; overflow-x:hidden; padding-bottom:80px; } @media(min-width:768px){ body{ background-image:url("../images/background-desktop.webp"); } }
 
 a{ text-decoration:none; color:inherit; }
 
@@ -192,3 +192,9 @@ img{ display:block; max-width:100%; height:auto; }
 .toast{ padding:14px 18px; min-width:250px; border-radius:16px; background:rgba(18,18,18,.9); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); border:1px solid rgba(255,255,255,.08); color:#fff; font-size:.95rem; transform:scale(.9); opacity:0; transition:.35s; box-shadow:0 10px 30px rgba(0,0,0,.4) }
 .toast-container{ position:fixed; bottom:90px; left:20px; display:flex; flex-direction:column; gap:10px; z-index:9999; pointer-events:none; }
 .toast.show{ transform:scale(1); opacity:1; }
+
+.bottom-nav{ position:fixed; left:0; right:0; bottom:0; height:72px; display:flex; justify-content:space-around; align-items:center; background:rgba(10,10,10,.78); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); border-top:1px solid rgba(255,255,255,.08); z-index:5000; }
+.nav-btn{ display:flex; flex-direction:column; align-items:center; justify-content:center; gpa:4px; background:none; border:none; color:white; cursor:pointer; font-size:23px; transition:.25s;} 
+.nav-btn span{ font-size:.75rem; }
+.nav-btn:hover{ color:#d4fa37; transform:translateY(-2px); }
+
