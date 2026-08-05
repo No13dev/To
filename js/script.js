@@ -37,54 +37,51 @@ price:"580,000 تومان",unit:"200عدد",status:"available",order:11 },
 description:"پوکه فیلتر قرمز کم گوگرد",
 price:"580,000 تومان",unit:"200عدد",status:"available",order:11 }
 ],
-cart:[],elements:{},state:{ search:"",activeModal:null,selectedProduct:null }};
-App.elements.grids = {};
-document.querySelectorAll(".product-grid").forEach((grid) => {
-const category = grid.dataset.category;
-App.elements.grids[category] = grid;
-});
-App.elements.productUnit = document.getElementById("product-unit");
-App.elements.cartContactModal = document.querySelector(".cart-contact-modal");
-App.elements.cartContactBtn = document.querySelector(".cart-contact-btn");
-App.elements.closeCartContact = document.querySelector(".close-cart-contact");
-App.elements.copyOrderBtn = document.querySelector(".copy-order-btn");
-App.elements.cartTotal = document.getElementById("cart-total");
-App.elements.productPrice = document.getElementById("product-price");
-App.elements.toastContainer = document.querySelector(".toast-container");
-App.elements.productNicotine = document.getElementById("product-nicotine");
-App.elements.timeline = document.getElementById("timeline");
-App.elements.orderModal = document.getElementById("order-modal");
-App.elements.orderBtn = document.getElementById("order-btn");
-App.elements.closeOrder = document.querySelector(".close-order");
-App.elements.menuOverlay = document.getElementById("menu-overlay");
-App.elements.menuBtn = document.getElementById("menu-btn");
-App.elements.sideMenu = document.getElementById("side-menu");
-App.elements.closeMenu = document.getElementById("close-menu");
-App.elements.productsToggle = document.getElementById("products-toggle");
-App.elements.productsMenu = document.getElementById("products-menu");
-App.elements.productModal = document.getElementById("product-modal");
-App.elements.productImage = document.getElementById("product-image");
-App.elements.productTitle = document.getElementById("product-title");
-App.elements.productDescription = document.getElementById("product-description");
-App.elements.productStatus = document.getElementById("product-status");
-App.elements.addProductBtn = document.getElementById("add-product-btn");
-App.elements.closeProduct = document.querySelector(".close-product");
-App.elements.cartModal = document.getElementById("cart-modal");
-App.elements.cartItems = document.querySelector(".cart-items");
-App.elements.clearCartBtn = document.querySelector(".clear-cart-btn");
-App.elements.closeCart = document.querySelector(".close-cart");
-App.elements.cartFloating = document.querySelector(".cart-floating");
-App.elements.cartCount = document.querySelector(".cart-count");
-App.elements.searchOverlay = document.getElementById("search-overlay");
-App.elements.searchResults = document.getElementById("search-results");
-App.elements.searchInput = document.querySelector(".search-box input");
-App.elements.searchInput.addEventListener( "focus", openSearch );
-App.elements.searchInput.addEventListener("input", (event) => {
-App.state.search = event.target.value;
+cart:[],elements:{},state:{search:"",activeModal:null,selectedProduct:null}};
+App.elements.grids={};
+document.querySelectorAll(".product-grid").forEach((grid)=>{const category=grid.dataset.category;
+App.elements.grids[category]=grid;});
+App.elements.productUnit=document.getElementById("product-unit");
+App.elements.cartContactModal=document.querySelector(".cart-contact-modal");
+App.elements.cartContactBtn=document.querySelector(".cart-contact-btn");
+App.elements.closeCartContact=document.querySelector(".close-cart-contact");
+App.elements.copyOrderBtn=document.querySelector(".copy-order-btn");
+App.elements.cartTotal=document.getElementById("cart-total");
+App.elements.productPrice=document.getElementById("product-price");
+App.elements.toastContainer=document.querySelector(".toast-container");
+App.elements.productNicotine=document.getElementById("product-nicotine");
+App.elements.timeline=document.getElementById("timeline");
+App.elements.orderModal=document.getElementById("order-modal");
+App.elements.orderBtn=document.getElementById("order-btn");
+App.elements.closeOrder=document.querySelector(".close-order");
+App.elements.menuOverlay=document.getElementById("menu-overlay");
+App.elements.menuBtn=document.getElementById("menu-btn");
+App.elements.sideMenu=document.getElementById("side-menu");
+App.elements.closeMenu=document.getElementById("close-menu");
+App.elements.productsToggle=document.getElementById("products-toggle");
+App.elements.productsMenu=document.getElementById("products-menu");
+App.elements.productModal=document.getElementById("product-modal");
+App.elements.productImage=document.getElementById("product-image");
+App.elements.productTitle=document.getElementById("product-title");
+App.elements.productDescription=document.getElementById("product-description");
+App.elements.productStatus=document.getElementById("product-status");
+App.elements.addProductBtn=document.getElementById("add-product-btn");
+App.elements.closeProduct=document.querySelector(".close-product");
+App.elements.cartModal=document.getElementById("cart-modal");
+App.elements.cartItems=document.querySelector(".cart-items");
+App.elements.clearCartBtn=document.querySelector(".clear-cart-btn");
+App.elements.closeCart=document.querySelector(".close-cart");
+App.elements.cartFloating=document.querySelector(".cart-floating");
+App.elements.cartCount=document.querySelector(".cart-count");
+App.elements.searchOverlay=document.getElementById("search-overlay");
+App.elements.searchResults=document.getElementById("search-results");
+App.elements.searchInput=document.querySelector(".search-box input");
+App.elements.searchInput.addEventListener("focus",openSearch);
+App.elements.searchInput.addEventListener("input",(event)=>{App.state.search = event.target.value;
 filterProducts();
 });
-const storyItems = [ 
-[ "سال ها پیش",
+App.elements.searchOverlay.addEventListener("click", (event) => {if (event.target === App.elements.searchOverlay) { closeSearch(); } });
+const storyItems = [ [ "سال ها پیش",
 "شروع ایده"
 ],
 [ 
@@ -93,13 +90,9 @@ const storyItems = [
 ],
 [ 
 "امروز",
-"خانواده تو"
-]
-];
-App.elements.searchOverlay.addEventListener("click", (event) => {
-if (event.target === App.elements.searchOverlay) { closeSearch(); } });
-function renderProducts(products = App.products) {
-products = [...products].sort((a, b) => a.order - b.order);
+"خانواده تو" ]];
+
+function renderProducts(products=App.products){products=[...products].sort((a,b)=>a.order - b.order);
 Object.values(App.elements.grids).forEach((grid) => {
 grid.innerHTML = "";
 });
