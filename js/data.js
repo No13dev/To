@@ -5,7 +5,7 @@ name: "ویرجینیا طلایی",
 category: "tobacco",
 weight: "100g",
 price: "400T",
-image: "images/virginia-gold.webp", 
+image: "images/virginiagold.webp", 
 status: "available" 
 },
 {
@@ -14,8 +14,8 @@ name: "T&T",
 category: "filter",
 weight: "200عدد",
 price: "550T",
-image: "images/virginia-gray.webp",
-status: "available"
+image: "images/virginiagray.webp",
+status: "unavailable"
 } 
 ];
 export const categories = [

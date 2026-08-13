@@ -16,4 +16,5 @@
 .skeleton{ animation:pulse 1.3s infinite; background:linear-gradient(90deg, #222,#333,#222); background-size:200%; }
 @keyframes pulse{ 0%{ background-position:200%; } 100%{background-position:-200%;}}
 .button:focus-vidible,a:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
-
+.add-btn:disabled{ opacity:0.35; cursor:not-allowed; background:var(--surface-2); color:var(--text-muted); transform:none; }
+.add-btn:disabled:hover{ background:var(--surface-2); transform:none; }
