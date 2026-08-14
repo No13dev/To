@@ -7,23 +7,111 @@ function updateCartCount(){
 const total = cart.reduce((sum,item)=> sum + item.quantity, 0);
 cartCount.textContent = total;}
 const heroSlides = document.querySelectorAll(".hero-slide");
+const heroDots=document.querySelector(".hero-dots");
+const heroPrev=document.querySelector(".hero-prev");
+const heroNext=document.querySelector(".hero-next");
 let currentHero = 0;
-if(heroSlides.length > 1){
-setInterval(()=>{
+let heroTimer;
+if(heroSlides.length > 0){
+heroSlides.forEach((_,index)=>{
+const dot = document.createElement("button");
+dot.type="button";
+dot.className="hero-dot";
+dot.setAttribute("aria-label",`تصویر${index +1}`);
+dot.addEventListener("click",()=>{
+showHero(index);
+restartHeroTimer();
+});
+heroDots.appendChild(dot);
+});
+const dots=heroDots.querySelectorAll(".hero-dot");
+function showHero(index){
 heroSlides[currentHero].classList.remove("active");
-currentHero = (currentHero + 1) % heroSlides.length;
-heriSlides[currentHero].classList.add("active");
-}, 2000); }
+dots[currentHero].classList.remove("active");
+currentHero=(index + heroSlides.length)%heroSlides.length;
+heroSlides[currentHero].classList.add("active");
+dots[currentHero].classList.add("active");}
+function nextHero(){showHero(currentHero+1);}
+function prevHero(){showHero(currentHero-1);}
+function restartHeroTimer(){
+clearInterval(heroTimer);
+heroTimer=setInterval(()=>{
+nextHero();},2000);}
+heroNext.addEventListener("click",()=>{nextHero();
+restartHeroTimer();});
+heroPrev.addEventListener("click",()=>{prevHero();
+restartHeroTimer();});
+dots[0].classList.add("active");
+restartHeroTimer();}
+
 function saveCart(){ localStorage.setItem("to-cart", JSON.stringify(cart));}
 function renderProducts(){products.forEach(product =>{
 const container = document.getElementById(`${product.category}-products`);
 if(!container) return;
 container.insertAdjacentHTML("beforeend",createProductCard(product));});}
-
+document.addEventListener("click",(event)=>{
+const card = event.target.closest(".product-card");
+if(!card) return;
+if(event.target.closest(".add-btn")) return;
+const productId = card.dataset.productId;
+const product = products.find(item=>item.id === productId);
+if(!product) return;
+const modalContent = modal.querySelector(".modal-content");
+modalContent.innerHTML = `
+<div class="product-detail-modal">
+<div class="cart-header">
+<h2>${product.name}</h2>
+<button class="modal-close" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"/></svg> </button>
+</div>
+<div class="nicotine-level">
+<span class="nicotine-dot nicotine-${getNicotineLevel(product.nicotine)}"></span>
+<span>نیکوتین${product.nicotine}mg</span>
+</div>
+<div class="product-detail">
+<img src="${product.image}" alt="${product.name}">
+<div class="product-detail-info">
+<h3>${product.name}</h3>
+<p>توضیحات:${product.title}</p>
+<p>وزن:${product.weight}</p>
+<div class="nicotine-level">
+<span class="nicotine-dot"></span>
+<span>نیکوتین</span>
+</div>
+<p>قیمت:${product.price}</p>
+<span class="status ${product.status === "available" ? "available" : "unavailable"}">
+${product.status === "available" ?  "موجود" : "نا موجود"}
+</span>
+<button class="modal-add-cart" type="button" data-product-id="${product.id}">افزودن به سبد خرید+</button>
+</div>
+</div>
+</div>
+`;
+modal.classList.remove("hidden");});
+function getNicotineLevel(nicotine){
+if(nicotine<=2)return "low";
+if(nicotine<=3)return "medium";
+if(nicotine<=5)return "high";
+return "very-high";}
+document.addEventListener("click", (event)=>{ 
+const button = event.target.closest(".modal-add-cart");
+if(!button) return;
+const productId = button.dataset.productId;
+const product= products.find(item=>item.id === productId);
+if(!product)return;
+const existingItem = cart.find(item=>item.id === product.id);
+if(existingItem){
+existingItem.quantity++;
+}else{
+cart.push({
+...product,
+quantity:1});}
+updateCartCount();
+saveCart();
+});
 function createProductCard(product){
 const isAvailable = product.status === "available";
 return`
-<article class="product-card">
+<article class="product-card" data-product-id="${product.id}">
 <div class="product-image">
 <img src="${product.image}"
 alt="${product.name}" loading="lazy">

@@ -1,6 +1,0 @@
-.header{ display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:.1rem; padding:.5rem .8rem; min-height:60px; text-align:right; }
-.logo{ display:flex; justify-content:center; align-items:center; flex-shrink:0;}
-.site-logo{ display:inline-flex; transition:var(--transition); }
-.site-logo:hover{ transform:scale(1.03); }
-.site-logo svg{width:75px; height:auto; }
-.header p{ margin:0; color:var(--text-muted); font-size:.7rem; letter-spacing:.03em; white-space:nowrap; }

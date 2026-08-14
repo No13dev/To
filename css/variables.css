@@ -1,9 +1,0 @@
-:root{ --bg:#0d0d0d; --surface:#171717; --surface-2:#1f1f1f; --gold:#b08d57; --gold-hover:#c8a46b; --text:#ede4d3; --text-muted:#a7a093; --border:rgba(255,255,255,.08); --success:#3cb371; --danger:#7d4b4b; --radius-sm:10px; --radius-md:16px; --radius-lg:24px;  --transition:.25s ease; --shadow:0 10px 30px rgba(0,0,0,.35); --container:1200px; --navbar-height:72px; --z-nav:1000; --z-menu:990; --z-modal:2000; --z-toast:3000; }
-*{ margin:0; padding:0; box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
-body{ font-family:'vazirmatn',sans-serif; background:var(--bg); color:var(--text); }
-img{ display:block; width:100%; }
-button{ font:inherit; border:none; background:none; cursor:pointer; }
-a{ text-decoration:none; color:inherit; }
-ul{ list-style:none; }
-
