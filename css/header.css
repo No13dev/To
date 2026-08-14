@@ -1,5 +1,6 @@
-.header{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; padding:2rem 1rem; text-align:center; }
-.logo{ display:flex; justify-content:center; align-items:center; }
+.header{ display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:.1rem; padding:.5rem .8rem; min-height:60px; text-align:right; }
+.logo{ display:flex; justify-content:center; align-items:center; flex-shrink:0;}
 .site-logo{ display:inline-flex; transition:var(--transition); }
 .site-logo:hover{ transform:scale(1.03); }
-.header p{ color:var(--text-muted); font-size:.95rem; letter-spacing:.08em; }
+.site-logo svg{width:75px; height:auto; }
+.header p{ margin:0; color:var(--text-muted); font-size:.7rem; letter-spacing:.03em; white-space:nowrap; }

@@ -252,3 +252,16 @@ ${category.name}
 </div>
 `;
 modal.classList.remove("hidden");});
+document.addEventListener("click", (event) => {
+const categoryButton = event.target.closest(".category-item");
+if (!categoryBotton) return;
+const categoryId = categoryButton.dataset.category;
+const section = document.getElementById(categoryId);
+if(!section)return;
+modal.classList.add("hidden");
+section.scrollIntoView({behavior:"smooth",block:"start"});});
+const navHome=documnet.getElementById("nav-home");
+navHome.addEventListener("click",()=>{
+const hero=document.getElementById("hero");
+if(!hero)return;
+hero.scrollIntoView({behavior:"smooth",block:"start"});});
