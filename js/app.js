@@ -1,9 +1,19 @@
 import { products,categories } from "./data.js";
 let cart = JSON.parse(localStorage.getItem("to-cart")) || [];
 const cartCount = document.getElementById("cart-count");
+const navCart = document.getElementById("nav-cart");
+const modal = document.getElementById("modal");
 function updateCartCount(){
 const total = cart.reduce((sum,item)=> sum + item.quantity, 0);
 cartCount.textContent = total;}
+const heroSlides = document.querySelectorAll(".hero-slide");
+let currentHero = 0;
+if(heroSlides.length > 1){
+setInterval(()=>{
+heroSlides[currentHero].classList.remove("active");
+currentHero = (currentHero + 1) % heroSlides.length;
+heriSlides[currentHero].classList.add("active");
+}, 2000); }
 function saveCart(){ localStorage.setItem("to-cart", JSON.stringify(cart));}
 function renderProducts(){products.forEach(product =>{
 const container = document.getElementById(`${product.category}-products`);
@@ -134,8 +144,7 @@ modalContent.innerHTML=`
 `;
 modal.classList.remove("hidden");
 });
-const navCart = document.getElementById("nav-cart");
-const modal = document.getElementById("modal");
+
 navCart.addEventListener("click",()=>{
 renderCart();
 modal.classList.remove("hidden");});
@@ -147,10 +156,11 @@ const remove = event.target.closest(".cart-remove");
 const clearCart = event.target.closest(".cart-clear");
 const copyCart = event.target.closest(".cart-copy");
 const orderCart = event.target.closest(".cart-order");
-if(clearCart){cart=[]; 
+if(clearCart){
+cart = []; 
 updateCartCount(); 
-saveCart(); r
-enderCart();
+saveCart(); 
+renderCart();
 return;}
 if(copyCart){
 const cartText = cart.map(item =>`
@@ -254,14 +264,14 @@ ${category.name}
 modal.classList.remove("hidden");});
 document.addEventListener("click", (event) => {
 const categoryButton = event.target.closest(".category-item");
-if (!categoryBotton) return;
+if (!categoryButton) return;
 const categoryId = categoryButton.dataset.category;
 const section = document.getElementById(categoryId);
 if(!section)return;
 modal.classList.add("hidden");
 section.scrollIntoView({behavior:"smooth",block:"start"});});
-const navHome=documnet.getElementById("nav-home");
+const navHome = document.getElementById("nav-home");
 navHome.addEventListener("click",()=>{
-const hero=document.getElementById("hero");
+const hero = document.getElementById("hero");
 if(!hero)return;
 hero.scrollIntoView({behavior:"smooth",block:"start"});});

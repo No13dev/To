@@ -1,7 +1,9 @@
-.hero{ position:relative; overflow:hidden; border-radius:var(--radius-lg); }
+.hero{ position:relative; overflow:hidden; border-radius:var(--radius-lg); aspect-ratio:16/8; }
+.hero-track{ position:relative; width:100%; height:100%; }
 .hero-image{ width:100%; height:100%; object-fit:cover; display:block; }
-.hero-slider{ overflow:hidden; }
-.hero-slide{ aspect-ratio:16/9; }
+.hero-slider{ position:relative; overflow:hidden; width:100%; height:100%; }
+.hero-slide{position:absolute; inset:0; opacity:0; transition:opacity 1.2s ease; }
 .hero-content{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; padding:2rem; }
+.hero-slide.active{ opacity:1; }
 .hero-title{ font-size:clamp(1.6rem,5vw,3rem); }
 .hero-subtitle{ color:var(--text-muted); margin-top:.5rem; }
