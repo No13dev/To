@@ -139,3 +139,11 @@ section{ padding-inline:16px; }
 .hero-dots{ position:absolute; left:50%; bottom:1rem; transform:translateX(-50%); display:flex; align-items:center; gap:.45rem; z-index:11; }
 .hero-dot{ width:7px; height:7px; padding:0; border-radius:50%; background:rgba(237,228,211,.4); transition:width .25s ease,background .25s ease,transform .25s ease; } 
 .hero-dot.active{ width:22px; border-radius:999px; background:var(--gold); }
+button svg{ width:22px; height:22px; display:block; flex-shrink:0; } 
+button svg path{ fill:currentColor; }
+.modal-close svg path,
+.hero-prev svg path,
+.hero-next svg path,
+.cart-clear svg path,
+.cart-copy svg path,
+.cart-order svg path{ fill:currentColor; }
