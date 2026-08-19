@@ -1,4 +1,5 @@
-import { products,categories } from "./data.js";
+import { categories } from "./data.js";
+let products=[];
 let cart = JSON.parse(localStorage.getItem("to-cart")) || [];
 const cartCount = document.getElementById("cart-count");
 const navCart = document.getElementById("nav-cart");
@@ -139,7 +140,15 @@ aria-label="افزودن ${product.name} به سبد خرید">
 </article>
 `;
 }
-renderProducts();
+async function loadProducts(){
+try{
+const response = await fetch("https://localhost:3000/api/products");
+if(!response.ok){ throw new Error("خطا در دریافت محصولات");}
+products = await response.json();
+renderProducts();}
+catch(error){
+console.error("products API Error:", error);}}
+loadProducts();
 
 document.addEventListener("click", (event) => { 
 const button = event.target.closest(".add-btn");

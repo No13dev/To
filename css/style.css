@@ -105,7 +105,7 @@ section{ padding-inline:16px; }
 .modal-add-cart,
 .cart-order,
 .cart-copy,
-.clear-cart{ min-height:44px; padding:.7rem 1rem; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; gpa:.5rem; font-size:.9rem; font-weight:600; transition:var(--transition); }
+.clear-cart{ min-height:44px; padding:.7rem 1rem; border-radius:12px; display:inline-flex; align-items:center; justify-content:column; gpa:.5rem; font-size:.9rem; font-weight:600; transition:var(--transition); }
 .modal-add-cart{ width:100%; background:var(--gold); color:#111; box-shadow:0 5px 18px rgba(176,141,87,.15); }
 .modal-add-cart:hover{ background:var(--gold-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(176,141,87,.25); }
 .modal-cart svg{ font-size:1.2rem; }
