@@ -1,5 +1,4 @@
-import { categories } from "./data.js";
-let products=[];
+import { products,categories } from "./data.js";
 let cart = JSON.parse(localStorage.getItem("to-cart")) || [];
 const cartCount = document.getElementById("cart-count");
 const navCart = document.getElementById("nav-cart");
@@ -50,6 +49,7 @@ function renderProducts(){products.forEach(product =>{
 const container = document.getElementById(`${product.category}-products`);
 if(!container) return;
 container.insertAdjacentHTML("beforeend",createProductCard(product));});}
+renderProducts();
 document.addEventListener("click",(event)=>{
 const card = event.target.closest(".product-card");
 if(!card) return;
@@ -140,16 +140,6 @@ aria-label="افزودن ${product.name} به سبد خرید">
 </article>
 `;
 }
-async function loadProducts(){
-try{
-const response = await fetch("https://localhost:3000/api/products");
-if(!response.ok){ throw new Error("خطا در دریافت محصولات");}
-const data=await response.json();
-products = data.products;
-renderProducts();}
-catch(error){
-console.error("products API Error:", error);}}
-loadProducts();
 
 document.addEventListener("click", (event) => { 
 const button = event.target.closest(".add-btn");
