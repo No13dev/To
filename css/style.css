@@ -171,12 +171,13 @@ button svg path{ fill:currentColor; }
 .contact-icon svg{ width:22px; height:22px; display:block; flex-shrink:0; }
 .contact-icon svg path{ fill:currentColor; } 
 .products{ padding-block:1rem 6rem; }
-.product-section{ position:relative; display:flex; flex-direction:column; gap:1.2rem; margin-bottom:4.5rem; }
+.product-section{ position:relative; display:flex; flex-direction:column; gap:1.25rem; margin-bottom:4.8rem; }
 .section-header{ position:relative; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-bottom:.9rem; border-bottom:1px solid rgba(176,141,87,.12); }
-.section-header::after{ content:""; position:absolute; right:0; bottom:-1px; width:52px; height:1px; background:var(--gold); box-shadow:0 0 12px rgba(176,141,87,.25); }
-.section-title{ position:relative; margin:0; padding-right:.8rem; color:var(--text); font-size:1.35rem; font-weight:600; letter-spacing:-.02em; }
-.section-title::before{ content:""; position:absolute; right:0; top:50%; width:2px; height:22px; background:var(--gold); transform:translateY(-50%); border-radius:999px; }
-.section-count{ color:var(--text-muted); font-size:.75rem; font-weight:400; opacity:.7; }
+.section-header::after{ content:""; position:absolute; right:0; bottom:-1px; width:52px; height:1px; background:var(--gold); box-shadow:0 0 10px rgba(176,141,87,.25); }
+.section-title{ position:relative; display:inline-flex; align-items:center; margin:0; padding-right:3.2rem; color:var(--text); font-size:clamp(1.15rem,2.5vw,1.45rem); font-weight:500; letter-spacing:.02em; text-shadow:0 0 18px rgba(237,228,211,.08); }
+.section-title::before{ content:attr(data-number); position:absolute; right:0; top:50%; color:var(--gold); transform:translateY(-50%); font-family:Arial, sans-serif; font-size:.68rem; font-weight:500; letter-spacing:.12em; opacity:.75;  }
+.section-title::after{ content:""; position:absolute; right:2.2rem; bottom:-1.35rem; width:32px; height:1px; background:linear-gradient(to left, var(--gold),transparent); opacity:.65; }
+.section-count{ color:var(--text-muted); font-size:.72rem; font-weight:400; opacity:.65; white-space:nowrap; }
 .product-grid{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:.9rem; }
 @media (min-width:600px;){
 .product-grid{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }}
